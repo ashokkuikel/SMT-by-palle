@@ -5,9 +5,8 @@
           <td colspan="3" style="width:850px;">
             ${detail/label}
             <span style="float:right">
-              <a tal:condition="php:_SESSION['admin'] == True' | NULL" href="${getPath}/monitor/service/edit/${detail/server_id}"><img src="${getPath}/assets/icons/page_white_edit.png" /></a>
-              &nbsp;
-              <a title="${text/monitor_overview_show_systemdetails | NULL}" href="/server/detail/${detail/home_system | NULL}"><img src="${getPath}/assets/icons/server.png" /></a>
+              <a type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-edit" aria-hidden="true" tal:condition="php:_SESSION['admin'] == True' | NULL" href="${getPath}/monitor/service/edit/${detail/server_id}" />
+              <a type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-briefcase" aria-hidden="true" title="${text/monitor_overview_show_systemdetails | NULL}" href="/server/detail/${detail/home_system | NULL}" />
             </span>
           </td>
         </tr>
@@ -51,7 +50,7 @@
           <td style="width:600px;">${text/structure_system_message | NULL}</td>
           <td style="width:100px;">
             ${text/structure_system_date_time | NULL} 
-            <a href="${getPath}${getURL}/empty" title="${text/empty_logfiles | NULL}" onclick="return confirm('${text/empty_logfiles | NULL}');"><img style="float:right;" src="${getPath}/assets/icons/cross.png" /></a>
+            <a type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-remove" aria-hidden="true" href="${getPath}${getURL}/empty" title="${text/empty_logfiles | NULL}" onclick="return confirm('${text/empty_logfiles | NULL}');" />
           </td>
         </tr>
         

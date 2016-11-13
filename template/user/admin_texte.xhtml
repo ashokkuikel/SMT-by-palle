@@ -56,7 +56,7 @@
 
             <tr tal:repeat="texte texte">
               <td style="width:30%;">
-                <a onclick="return confirm('${text/user_admin_text_delete | NULL}');" href="${getPath}${getURL}/delete/${texte/id}"><img src="${getPath}/assets/icons/del.png" /></a>
+                <a type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-remove" aria-hidden="true" onclick="return confirm('${text/user_admin_text_delete | NULL}');" href="${getPath}${getURL}/delete/${texte/id}" />
                 ${texte/text_name | NULL}
               </td>
               <td style="width:70%;">

@@ -1,31 +1,5 @@
-/*------------------------------------*\
-	#OVERRIDE STLES
-	This style sheet can be used for two different functions:
-	1. Override specific Bootstrap styles.
-	2. Add your own styles.
-\*------------------------------------*/
-
-
-
-/**
- * Bootstrap requires a containing element to wrap site contents 
- * and house the grid system. You may choose one of two containers.
- * Use .container for a responsive fixed width container.
- * Use .container-fluid for a full width container.
-
- * If using container-fluid, you may need to set a maximum width, 
- * so that the container will not spread to the entire viewport.
-*/
 
 .container-fluid { max-width: 1200px; }
-
-
-
-/**
- * We can add some helper classes to turn off default margin on
- * the top of headings if needed.
-*/
-
 .margin-t-0 { margin-top: 0; }
 .margin-t-h { margin-top: .5em; }
 .margin-t-1 { margin-top: 1em; }
@@ -390,7 +364,6 @@ legend {
 	background-color:#eee;
 }
 
-/* Bootstrap 2.3.2 added icons */
 .icon-hdd {
   background-position: 0 -144px;
 }

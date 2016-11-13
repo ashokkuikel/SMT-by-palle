@@ -12,7 +12,7 @@
             <td>${text/user_admin_company | NULL}</td>
             <td style="width:100px;">${text/user_admin_rights | NULL}</td>
             <td style="width:100px; text-align:right;">
-              <a tal:condition="authpass | NULL" title="${text/structure_new_user | NULL}" href="${getPath}/user/admin_user_new"><img border="0" src="${getPath}/assets/icons/add.png"/></a>
+              <a tal:condition="authpass | NULL" type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-plus" aria-hidden="true"  title="${text/structure_new_user | NULL}" href="${getPath}/user/admin_user_new" />
             </td>
           </tr>
 
@@ -23,9 +23,8 @@
             <td>${liste/company}</td>
             <td style="width:100px;">${liste/rechte}</td>
             <td style="width:100px; text-align:right;">
-                <a title="${text/user_admin_list_edit_user | NULL}" href="${getPath}/user/admin_user_edit/${liste/username}"><img src="${getPath}/assets/icons/page_white_edit.png" /></a>
-                &nbsp;
-                <a title="${text/user_admin_del_user | NULL}" href="${getPath}/user/admin_user_liste/delete/${liste/username}" onclick="return confirm('${text/user_admin_user_del | NULL}');"><img src="${getPath}/assets/icons/del.png" /></a>
+              <a type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-edit" aria-hidden="true" title="${text/user_admin_list_edit_user | NULL}" href="${getPath}/user/admin_user_edit/${liste/username}" />
+              <a type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-remove" aria-hidden="true" title="${text/user_admin_del_user | NULL}" href="${getPath}/user/admin_user_liste/delete/${liste/username}" onclick="return confirm('${text/user_admin_user_del | NULL}');" />
             </td>
           </tr>
         </table>

@@ -5,18 +5,11 @@
         <td colspan="2" style="width:840px;">
           ${text/structure_details_details | NULL}: ${server_detail/bezeichnung}
           <span style="float:right;">
-            <a tal:condition="php:server_detail['wartung'] == 1 | NULL" title="${text/inventory_server_mt_off | NULL}" href="${getPath}/${controller}/wartung/off/${server_detail/id}">
-              <img src="${getPath}/assets/icons/error.png" />
-            </a>
-            &nbsp;
-            <a tal:condition="php:_SESSION['admin'] == True' | NULL" title="${text/vmware_detail_edit | NULL}" href="${getPath}/${controller}/edit/${server_detail/id}"><img src="${getPath}/assets/icons/page_white_edit.png" /></a>
-            &nbsp;
-            <a title="${text/inventory_license_update_dns | NULL}" href="${getPath}${getURL}/dnsreload">
-            <img style="width:20px;" src="${getPath}/assets/icons/dns-small.png" /></a>
-            <a tal:condition="add_favorite | NULL" title="${text/inventory_server_fav_save | NULL}" href="${getPath}${getURL}/favorite">
-            <img style="width:20px;" src="${getPath}/assets/images/favorite.png" /></a>
-            <a tal:condition="del_favorite | NULL" title="${text/inventory_server_fav_del | NULL}" href="${getPath}${getURL}/favorite">
-            <img style="width:20px;" src="${getPath}/assets/images/del_favorite.png" /></a>
+            <a type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-alert" aria-hidden="true" tal:condition="php:server_detail['wartung'] == 1 | NULL" title="${text/inventory_server_mt_off | NULL}" href="${getPath}/${controller}/wartung/off/${server_detail/id}" />
+            <a type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-edit" aria-hidden="true" tal:condition="php:_SESSION['admin'] == True' | NULL" title="${text/vmware_detail_edit | NULL}" href="${getPath}/${controller}/edit/${server_detail/id}" />
+            <a type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-globe" aria-hidden="true" title="${text/inventory_license_update_dns | NULL}" href="${getPath}${getURL}/dnsreload" />
+            <a type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-floppy-saved" aria-hidden="true" tal:condition="add_favorite | NULL" title="${text/inventory_server_fav_save | NULL}" href="${getPath}${getURL}/favorite" />
+            <a type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-floppy-remove" aria-hidden="true" tal:condition="del_favorite | NULL" title="${text/inventory_server_fav_del | NULL}" href="${getPath}${getURL}/favorite" />
           </span>
         </td>
       </tr>
