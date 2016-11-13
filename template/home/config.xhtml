@@ -1,0 +1,23 @@
+<tal:block metal:define-macro="standard">
+  
+  <div class="list-group margin-b-3">
+    <form name="config" method="post" action="${getPath}${getURL}/save">
+      <table>
+        <tr class="list-group-item" style="background-color:#e3e3e3; font-weight: bold;">
+          <td colspan="2">Systemkonfiguration bearbeiten</td>
+        </tr>
+        
+        <tr class="list-group-item" tal:repeat="conf config">
+          <td style="width:25%;">${conf/id}</td>
+          <td style="width:75%;"><input type="text" name="${conf/id}" class="form-control" value="${conf/value}" /></td>
+        </tr>
+        
+      </table><br />
+      <button type="submit" class="btn btn-success" style="width:200px;float:left;">Änderung speichern</button>
+      <a href="${getPath}" class="btn btn-danger show-modal" style="width:200px;float:right;">Abbrechen</a>
+    </form>
+  </div>
+  
+  
+  
+</tal:block>

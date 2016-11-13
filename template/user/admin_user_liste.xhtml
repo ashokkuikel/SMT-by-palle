@@ -1,0 +1,64 @@
+<tal:block metal:define-macro="standard">
+
+  	<div class="row">
+		<div class="col-sm-8 col-sm-push-4">
+      
+      <div class="list-group margin-b-3">
+        <table>
+          <tr style="background-color:#e3e3e3; font-weight: bold;">
+            <td style="width:125px;">${text/user_admin_last_name | NULL}</td>
+            <td style="width:125px;">${text/user_admin_first_name | NULL}</td>
+            <td>${text/user_admin_email | NULL}</td>
+            <td>${text/user_admin_company | NULL}</td>
+            <td style="width:100px;">${text/user_admin_rights | NULL}</td>
+            <td style="width:100px; text-align:right;">
+              <a tal:condition="authpass | NULL" title="${text/structure_new_user | NULL}" href="${getPath}/user/admin_user_new"><img border="0" src="${getPath}/assets/icons/add.png"/></a>
+            </td>
+          </tr>
+
+          <tr tal:repeat="liste user_liste">
+            <td style="width:125px;">${liste/lastname}</td>
+            <td style="width:125px;">${liste/firstname}</td>
+            <td>${liste/email}</td>
+            <td>${liste/company}</td>
+            <td style="width:100px;">${liste/rechte}</td>
+            <td style="width:100px; text-align:right;">
+                <a title="${text/user_admin_list_edit_user | NULL}" href="${getPath}/user/admin_user_edit/${liste/username}"><img src="${getPath}/assets/icons/page_white_edit.png" /></a>
+                &nbsp;
+                <a title="${text/user_admin_del_user | NULL}" href="${getPath}/user/admin_user_liste/delete/${liste/username}" onclick="return confirm('${text/user_admin_user_del | NULL}');"><img src="${getPath}/assets/icons/del.png" /></a>
+            </td>
+          </tr>
+        </table>
+      </div> 
+      
+      <div class="list-group margin-b-3" tal:condition="Blaetter | NULL">
+        <table>
+          <tr style="background-color:#e3e3e3; font-weight: bold;">
+            <td style="width:283px;text-align:left;">
+              <a class="btn btn-primary" tal:condition="php:aSession['db_limit']['prev'] >= 0 | NULL" href="${getPath}/${controller}/${methode}/${aSession/db_limit/prev}">${text/system_previous_page | NULL}</a>
+              <span tal:condition="php:aSession['db_limit']['prev'] < 0 | NULL">${text/system_previous_page | NULL}</span>
+            </td>
+            <td style="width:283px;text-align:center;">${aSession/db_summe} ${text/system_total_records | NULL}</td>
+            <td style="width:283px;text-align:right;">
+              <a class="btn btn-primary" tal:condition="php:aSession['db_limit']['next'] < aSession['db_summe'] | NULL" href="${getPath}/${controller}/${methode}/${aSession/db_limit/next}">${text/system_next_page | NULL}</a>
+              <span tal:condition="php:aSession['db_limit']['next'] > aSession['db_summe'] | NULL">${text/system_next_page | NULL}</span>
+            </td>
+          </tr>
+        </table>
+      </div>
+      
+    </div>
+		
+    <div class="col-sm-4 col-sm-pull-8">
+      <tal:block metal:use-macro="structure/submenu.xhtml/user"></tal:block>
+        <span tal:condition="admin | NULL">
+      <tal:block metal:use-macro="structure/submenu.xhtml/admin"></tal:block>
+      </span>
+      <tal:block metal:use-macro="structure/panel.xhtml/standard"></tal:block>
+    </div>
+	</div>
+
+  <script src="${getPath}/assets/javascript/bootstrap.min.js"></script>
+  <a name="bottom"></a>
+
+</tal:block>

@@ -1,0 +1,25 @@
+<tal:block metal:define-macro="standard">
+  <div class="list-group margin-b-3">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">${text/structure_search_searchtext | NULL}</h4>
+      </div>
+      <div class="panel-body">
+        <form action="${getPath}/${controller}/search" method="post">
+        <input type="hidden" name="methode" value="${methode | NULL}" />
+				<div class="input-group">
+					<label class="sr-only" for="search-form">${text/structure_search | NULL}</label>
+						<input name="search_string" type="text" class="form-control" id="search-form" value="${aSession/fst | NULL}" placeholder="${text/structure_search_placeholder | NULL}"/>
+						<span class="input-group-btn">
+              <button class="btn btn-default" type="submit">
+                <span class="glyphicon glyphicon-search"></span>
+                <span class="sr-only">${text/structure_search_search | NULL}</span>
+              </button>
+						</span>
+				</div>
+			</form>			
+      </div>
+    </div>
+  </div>
+  
+</tal:block>

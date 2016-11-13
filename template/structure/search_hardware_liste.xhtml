@@ -1,0 +1,38 @@
+<tal:block metal:define-macro="standard">
+
+  <div class="list-group margin-b-3">
+    <table>
+      <tr style="background-color:#e3e3e3; font-weight: bold;">
+        <td style="width:125px;">${text/inventory_hardware_category | NULL}</td>
+        <td style="width:200px;">${text/inventory_hardware_manufacturer | NULL}</td>
+        <td style="width:200px;">${text/inventory_hardware_model | NULL}</td>
+        <td style="width:100px;">${text/inventory_hardware_inventory | NULL}</td>
+        <td style="width:100px;">${text/inventory_hardware_assignment | NULL}</td>
+        <td style="width:100px;">${text/inventory_hardware_date_of_purchase | NULL}</td>
+        <td style="width:75px;">
+          ${text/inventory_dns_action | NULL}
+          <span style="float:right">
+            <a tal:condition="php:_SESSION['admin'] == True' | NULL" title="${text/structure_new_license | NULL}" href="${getPath}/inventory/hardware/new"><img border="0" src="${getPath}/assets/icons/add.png"/></a>
+          </span>
+        </td>
+      </tr>
+
+      <tr tal:condition="liste | NULL" tal:repeat="list liste">
+        <td style="width:125px;">${list/kategorie | NULL}</td>
+        <td style="width:200px;">${list/hersteller | NULL}</td>
+        <td style="width:200px;">${list/modell | NULL}</td>
+        <td style="width:100px;">${list/inventarnummer | NULL}</td>
+        <td style="width:100px;">${list/zuordnung | NULL}</td>
+        <td style="width:100px;">${list/kaufdatum | NULL}</td>
+        <td style="width:75px;">
+          <span tal:condition="php:_SESSION['admin'] == True' | NULL">
+            <a title="${text/vmware_detail_edit | NULL}" href="${getPath}/inventory/hardware/edit/${list/id}"><img src="${getPath}/assets/icons/page_white_edit.png" /></a>
+            &nbsp;
+            <a title="${text/structur_system_del | NULL}" href="${getPath}/inventory/hardware/delete/${list/id}" onclick="return confirm('${text/inventory_hardware_delete | NULL}');"><img src="${getPath}/assets/icons/del.png" /></a>
+          </span>
+        </td>
+      </tr>
+    </table>
+  </div> 
+  
+</tal:block>

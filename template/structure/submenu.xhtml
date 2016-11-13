@@ -1,0 +1,64 @@
+<tal:block metal:define-macro="standard">
+  <div class="list-group margin-b-3" tal:condition="submenu_content | NULL">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">${text/nav_submenu | NULL}</h4>
+      </div>
+      <div class="panel-body" style="padding: 0px;" tal:repeat="submenu submenu_content">
+        <a href="${getPath}/${submenu/link | NULL}" class="${submenu/aktiv | NULL} list-group-item">${submenu/bezeichnung | NULL}</a>
+      </div>
+    </div>
+  </div>
+</tal:block>
+
+
+<tal:block metal:define-macro="knowledge">
+  <div class="list-group margin-b-3">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          ${text/nav_submenu_knowledge | NULL}
+          <span style="float:right">
+            <a title="${text/structur_del_search | NULL}" tal:condition="aSession/fst |  NULL" href="${getPath}/knowledge/clear"><img style="width:16px;" src="${getPath}/assets/images/clear_filter.png" /></a>
+            <a tal:condition="php:_SESSION['admin'] == True' | NULL" title="${text/structure_new | NULL}" href="${getPath}/knowledge/new"><img border="0" src="${getPath}/assets/icons/add.png"/></a>
+          </span>
+        </h4>
+      </div>
+      <div class="panel-body" style="padding:0px;" tal:repeat="submenu submenu_knowledge">
+        <a href="${getPath}/knowledge/${submenu/id | NULL}" class="${submenu/aktiv | NULL} list-group-item">${submenu/page_name | NULl}</a>
+      </div>
+    </div>
+  </div>
+</tal:block>
+
+
+<tal:block metal:define-macro="user">
+  <div class="list-group margin-b-3">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">${text/nav_submenu | NULL}</h4>
+      </div>
+      <div class="panel-body" style="padding: 0px;">
+        <a href="/user/mypage" class="${mypage_active | NULL} list-group-item">${text/structure_sub_mypage | NULL}</a>
+        <a href="/user/daten" class="${daten_active | NULL} list-group-item">${text/structure_sub_mydata | NULL}</a>
+      </div>
+    </div>
+  </div>
+</tal:block>
+
+
+<tal:block metal:define-macro="admin">
+  <div class="list-group margin-b-3">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">${text/nav_administration | NULL}</h4>
+      </div>
+      <div class="panel-body" style="padding: 0px;">
+        <a href="/user/admin_config" class="${admin_config_active | NULL} list-group-item">${text/structure_sub_config | NULL}</a>
+        <a href="/user/admin_user_liste" class="${admin_user_active | NULL} list-group-item">${text/structure_sub_users | NULL}</a>
+        <a href="/user/admin_texte" class="${admin_texte_active | NULL} list-group-item">${text/structure_sub_text_edit | NULL}</a>
+        <a href="/user/admin_news" class="${admin_news_active | NULL} list-group-item">${text/structure_sub_messages | NULL}</a>
+      </div>
+    </div>
+  </div>
+</tal:block>

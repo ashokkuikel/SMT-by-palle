@@ -1,0 +1,90 @@
+<tal:block metal:define-macro="standard">
+  <head>
+    <title>${page_title | NULL}</title>
+    <meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="Description" lang="en" content="ADD SITE DESCRIPTION" />
+		<meta name="author" content="ADD AUTHOR INFORMATION" />
+		<meta name="robots" content="index, follow" />
+
+		<link rel="apple-touch-icon" href="${getPath}/assets/images/apple-touch-icon.png" />
+		<link rel="shortcut icon" href="${getPath}/assets/images/favicon.ico" />
+		<link rel="stylesheet" href="${getPath}/assets/css/bootstrap.css" />
+		<link rel="stylesheet" href="${getPath}/assets/css/styles.css" />
+    
+    <script language="javascript" type="text/javascript" src="${getPath}/assets/javascript/javascript.js"></script>
+    <script language="javascript" type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script language="javascript" type="text/javascript" src="${getPath}/assets/javascript/timer.js"></script>
+    
+    <link rel="stylesheet" type="text/css" href="${getPath}/assets/css/tcal.css" />
+    <script type="text/javascript" src="${getPath}/assets/javascript/tcal.js"></script> 
+    
+    <script type="text/javascript">
+    <!--
+    function insertInputFieldName(placeholder_text) {
+     var inputField =  document.createElement("input");
+          inputField.setAttribute("class","form-control");
+          inputField.setAttribute("placeholder",placeholder_text);
+          inputField.setAttribute("type","text");
+          inputField.setAttribute("autocomplete","off");
+          inputField.setAttribute("list","detail_name");
+          inputField.setAttribute("name","detail_name[]");
+     var br  =  document.createElement("br");
+     document.getElementById('name').appendChild(inputField);
+     document.getElementById('name').appendChild(br);
+    }
+
+    function insertInputFieldValue(value_text) {
+     var inputField =  document.createElement("input");
+          inputField.setAttribute("class","form-control");
+          inputField.setAttribute("placeholder",value_text);
+          inputField.setAttribute("type","text");
+          inputField.setAttribute("autocomplete","off");
+          inputField.setAttribute("list","detail_value");
+          inputField.setAttribute("name","detail_value[]");
+     var br  =  document.createElement("br");
+     document.getElementById('value').appendChild(inputField);
+     document.getElementById('value').appendChild(br);
+    }
+
+    function removeField(id) {
+      document.getElementById('name_'+id).value='';
+      document.getElementById('value_'+id).value='';
+    }
+    //-->
+    </script>
+    
+  </head>
+</tal:block>
+
+
+<tal:block metal:define-macro="editor">
+  <script type="text/javascript" src="${getPath}/assets/editor/nicEdit.js"></script>
+  <script type="text/javascript">
+    bkLib.onDomLoaded(function() { nicEditors.allTextAreas() });
+  </script>
+</tal:block>
+
+
+
+<tal:block metal:define-macro="overview">
+  <head>
+    <meta charset="utf-8" />
+    <title>${text/structure_metatags_systemoverview | NULL}</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="Description" lang="en" content="ADD SITE DESCRIPTION" />
+		<meta name="author" content="ADD AUTHOR INFORMATION" />
+		<meta name="robots" content="index, follow" />
+		<link rel="apple-touch-icon" href="${getPath}/assets/images/apple-touch-icon.png" />
+		<link rel="shortcut icon" href="${getPath}/assets/images/favicon.ico" />
+		<link rel="stylesheet" href="${getPath}/assets/css/bootstrap.css" />
+    <script language="javascript" type="text/javascript" src="${getPath}/assets/javascript/timer.js"></script>
+    
+    <script type = "text/javascript">
+      startTimer(${page_reload});
+    </script>
+    <meta http-equiv="refresh" content="${page_reload}; URL=${getPath}${getURL}" />    
+  </head>
+</tal:block>

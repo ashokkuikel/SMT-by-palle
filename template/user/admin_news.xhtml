@@ -1,0 +1,64 @@
+<tal:block metal:define-macro="standard">
+  
+  <div class="row">
+		<div class="col-sm-8 col-sm-push-4">
+      <form name="news" method="post" action="${getPath}${getURL}/save">
+        <div class="form-group">
+          <label for="contactComment">${text/user_admin_news_form_title}</label>
+          <input type="text" name="titel" class="form-control" id="contactName" placeholder="${text/user_admin_news_title_placeholder}" /> 
+        </div>
+        <div class="form-group">
+          <textarea name="nachricht" class="form-control" id="contactComment" style="height:100px;"></textarea>
+        </div>
+        <select class="form-control" style="width:200px;float:left;" name="controller">
+          <option value="">${text/user_admin_news_select_option_1}</option>
+          <option value="">-----------------------------------</option>
+          <option value="home">${text/user_admin_news_select_option_2}</option>
+          <option value="server">${text/user_admin_news_select_option_3}</option>
+          <option value="vmware">${text/user_admin_news_select_option_4}</option>
+          <option value="inventory">${text/user_admin_news_select_option_5}</option>
+          <option value="monitor">${text/user_admin_news_select_option_6}</option>
+        </select>
+        &nbsp;&nbsp;&nbsp;
+        <button type="submit" class="btn btn-success" style="width:200px;float:right;">${text/user_admin_news_submit_new}</button>
+      </form>
+
+      <hr />
+
+      <div class="well" tal:condition="news_edit | NULL" tal:repeat="form news_edit" >
+        <div class="media">
+          <div class="media-left">
+            ${form/datum}<br />
+          </div>
+
+          <div class="media-body">
+            <form name="news" method="post" action="${getPath}${getURL}/save">
+              <input type="hidden" name="id" value="${form/id | NULL}" />
+              <div class="form-group">
+                <input type="text" name="titel" class="form-control" id="contactName" value="${form/titel}" /> 
+              </div>
+              <div class="form-group">
+                <textarea name="nachricht" class="form-control" id="contactComment" style="height:100px;">${form/nachricht}</textarea>
+              </div>
+              <button type="submit" class="btn btn-success" style="width:200px;float:left;">${text/user_admin_news_submit_edit}</button> &nbsp; 
+              <a href="${getPath}${getURL}/delete/${form/id | NULL}" class="btn btn-danger show-modal" onclick="return confirm('${text/user_admin_news_link_del}');" style="width:200px;float:right;">${text/user_admin_news_del}</a>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+		
+    <div class="col-sm-4 col-sm-pull-8">
+      <tal:block metal:use-macro="structure/submenu.xhtml/user"></tal:block>
+      <span tal:condition="admin | NULL">
+        <tal:block metal:use-macro="structure/submenu.xhtml/admin"></tal:block>
+      </span>
+      <tal:block metal:use-macro="structure/panel.xhtml/standard"></tal:block>
+    </div>
+	</div>
+
+  <script src="${getPath}/assets/javascript/bootstrap.min.js"></script>
+  <a name="bottom"></a>
+
+  
+</tal:block>

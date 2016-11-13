@@ -1,0 +1,16 @@
+<tal:block metal:define-macro="standard">
+  
+  <div id="check_menue_main">
+    <div id="check_current_port"></div>
+    <div id="check_start_button_port">
+      <button class="btn btn-success" onclick="startPortScan('${target}')">${text/inventory_portscan | NULL}</button>
+      <input type="text" id="range_start" name="range_start" placeholder="${text/inventory_portscan_start | NULL}" value="0" />
+      <input type="text" id="range_ende" name="range_ende" placeholder="${text/inventory_portscan_end | NULL}" value="64739" />
+    </div>
+  </div>
+  
+  <div id="check_container">
+    <div id="check_content"></div>
+  </div>
+  
+</tal:block>

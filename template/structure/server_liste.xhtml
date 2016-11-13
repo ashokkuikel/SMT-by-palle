@@ -1,0 +1,56 @@
+<tal:block metal:define-macro="standard">
+  
+  <div class="list-group margin-b-3">
+    <table>      
+      <tr style="background-color:#e3e3e3; font-weight: bold;">
+        <td  width="30%">
+          <a tal:condition="csv_export | NULL" href="${getPath}${getURL}/export" title="${text/structure_inv_service_download | NULL}"><img src="${getPath}/assets/icons/doc_excel_csv.png" /></a>
+          ${text/inventory_hardware_designation | NULL}
+        </td>
+        <td width="20%">${text/inventory_host | NULL}</td>
+        <td width="20%">${text/inventory_ip | NULL}</td>
+        <td width="20%">${text/structure_details_location | NULL}</td>
+        <td width="10%" style="text-align:right;"></td>
+      </tr>
+
+      <tr class="tr" tal:repeat="liste server_liste">
+        <td class="td">
+          <a href="${getPath}/${liste/serverart | NULL}/detail/${liste/id}">${liste/bezeichnung}</a>
+        </td>
+        <td>${liste/hostname}</td>
+        <td>${liste/ipadressen}</td>
+        <td>${liste/standort}</td>
+        <td style="text-align:right;">
+          <a tal:condition="php:liste['wartung'] == 1 | NULL" title="${text/inventory_server_mt_off | NULL}" href="${getPath}/${controller}/wartung/off/${liste/id}">
+          <img src="${getPath}/assets/icons/error.png" />
+          &nbsp;</a>
+          <span tal:condition="php:_SESSION['admin'] == True' | NULL">
+            <a title="${text/vmware_detail_edit | NULL}" href="${getPath}/${liste/serverart | NULL}/edit/${liste/id}"><img src="${getPath}/assets/icons/page_white_edit.png" /></a>
+            &nbsp;
+            <a title="${text/structur_system_del | NULL}" href="${getPath}/${liste/serverart | NULL}/delete/${liste/id}" onclick="return confirm('${text/inventory_hardware_delete | NULL}');"><img src="${getPath}/assets/icons/del.png" /></a>
+          </span>
+          <a class="btn btn-small" href="http://dev.server-monitor.de/?&amp;mod=server&amp;action=view&amp;id=2"><i class="icon-chart"></i></a>
+        </td>
+      </tr>
+    </table>
+  </div> 
+    
+    
+  <div class="list-group margin-b-3" tal:condition="Blaetter | NULL">
+    <table>
+      <tr style="background-color:#e3e3e3; font-weight: bold;">
+        <td style="width:33%px;text-align:left;">
+          <a class="btn btn-primary" tal:condition="php:aSession['db_limit']['prev'] >= 0 | NULL" href="${getPath}/${controller}/${methode}/${aSession/db_limit/prev}">${text/system_previous_page | NULL}</a>
+          <span tal:condition="php:aSession['db_limit']['prev'] < 0 | NULL">${text/system_previous_page | NULL}</span>
+        </td>
+        <td style="width:33%;text-align:center;">${aSession/db_summe} ${text/structure_list_total_systems | NULL}</td>
+        <td style="width:33%;text-align:right;">
+          <a class="btn btn-primary" tal:condition="php:aSession['db_limit']['next'] < aSession['db_summe'] | NULL" href="${getPath}/${controller}/${methode}/${aSession/db_limit/next}">${text/system_next_page | NULL}</a>
+          <span tal:condition="php:aSession['db_limit']['next'] > aSession['db_summe'] | NULL">${text/system_next_page | NULL}</span>
+        </td>
+      </tr>
+    </table>
+  </div>
+  
+  
+</tal:block>

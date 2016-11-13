@@ -1,0 +1,36 @@
+<tal:block metal:define-macro="standard">
+
+  <div class="list-group margin-b-3">
+    <table>
+      <tr style="background-color:#e3e3e3; font-weight: bold;">
+        <td style="width:50px;">${text/inventory_license_list_number | NULL}</td>
+        <td style="width:125px;">${text/inventory_hardware_manufacturer | NULL}</td>
+        <td style="width:125px;">${text/inventory_license_list_product | NULL}</td>
+        <td style="width:200px;">${text/inventory_license_version | NULL}</td>
+        <td style="width:325px;">${text/inventory_license_list_key | NULL}</td>
+        <td style="width:60px;">
+         ${text/inventory_dns_action | NULL} 
+          <span style="float:right">
+            <a tal:condition="php:_SESSION['admin'] == True' | NULL" title="${text/structure_new_license | NULL}" href="${getPath}/inventory/license/new"><img border="0" src="${getPath}/assets/icons/add.png"/></a>
+          </span>
+        </td>
+      </tr>
+
+      <tr tal:repeat="list liste">
+        <td style="width:50px;">${list/anzahl}</td>
+        <td style="width:125px;">${list/hersteller}</td>
+        <td style="width:125px;">${list/produkt}</td>
+        <td style="width:200px;">${list/version}</td>
+        <td style="width:325px;">${list/licensekey}</td>
+        <td style="width:60px;">
+          <span tal:condition="php:_SESSION['admin'] == True' | NULL">
+            <a title="${text/vmware_detail_edit | NULL}" href="${getPath}/inventory/license/edit/${list/id}"><img src="${getPath}/assets/icons/page_white_edit.png" /></a>
+            &nbsp;
+            <a title="${text/structur_system_del | NULL}" href="${getPath}/inventory/license/delete/${list/id}" onclick="return confirm('${text/inventory_hardware_delete | NULL}');"><img src="${getPath}/assets/icons/del.png" /></a>
+          </span>
+        </td>
+      </tr>
+    </table>
+  </div> 
+  
+</tal:block>

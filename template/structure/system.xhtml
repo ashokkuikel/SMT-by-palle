@@ -1,0 +1,135 @@
+<tal:block metal:define-macro="service_detail">
+  <div class="list-group margin-b-3">
+      <table>
+        <tr style="background-color:#e3e3e3; font-weight: bold;">
+          <td colspan="3" style="width:850px;">
+            ${detail/label}
+            <span style="float:right">
+              <a tal:condition="php:_SESSION['admin'] == True' | NULL" href="${getPath}/monitor/service/edit/${detail/server_id}"><img src="${getPath}/assets/icons/page_white_edit.png" /></a>
+              &nbsp;
+              <a title="${text/monitor_overview_show_systemdetails | NULL}" href="/server/detail/${detail/home_system | NULL}"><img src="${getPath}/assets/icons/server.png" /></a>
+            </span>
+          </td>
+        </tr>
+        
+        <tr>
+          <td style="width:283px;">${text/inventory_hardware_designation | NULL}: ${detail/label}</td>
+          <td style="width:283px;">${detail/ip}</td>
+          <td style="width:283px;">${text/monitor_service_port | NULL}: ${detail/port}</td>
+        </tr>
+        
+        <tr>
+          <td style="width:283px;">${text/structure_system_type | NULL}: ${detail/type}</td>
+          <td style="width:283px;">${text/monitor_service_searchpattern | NULL}: ${detail/pattern}</td>
+          <td style="width:283px;">${text/structure_system_status | NULL}: ${detail/status}</td>
+        </tr>
+        
+        <tr>
+          <td style="width:283px;">${text/monitor_overview_last_online | NULL}: ${detail/last_online}</td>
+          <td style="width:283px;">${text/monitior_overview_last_check | NULL}: ${detail/last_check}</td>
+          <td style="width:283px;">${text/monitor_overview_rtime | NULL}: ${detail/rtime}</td>
+        </tr>
+        
+        <tr>
+          <td style="width:283px;">${text/structure_system_monitor | NULL}: ${detail/active}</td>
+          <td style="width:283px;">${text/structure_system_pushover | NULL}: ${detail/pushover}</td>
+          <td style="width:283px;">${text/structure_system_email | NULL}: ${detail/email}</td>
+        </tr>
+        <tr>
+          <td colspan="3">${text/inventory_hardware_description | NULL}: ${detail/description}</td>
+        </tr>
+      </table>
+  </div>
+</tal:block>
+
+
+<tal:block metal:define-macro="service_log">
+  <div class="list-group margin-b-3">
+      <table>
+        <tr style="background-color:#e3e3e3; font-weight: bold;">
+          <td style="width:80px;">${text/structure_system_type | NULL}</td>
+          <td style="width:600px;">${text/structure_system_message | NULL}</td>
+          <td style="width:100px;">
+            ${text/structure_system_date_time | NULL} 
+            <a href="${getPath}${getURL}/empty" title="${text/empty_logfiles | NULL}" onclick="return confirm('${text/empty_logfiles | NULL}');"><img style="float:right;" src="${getPath}/assets/icons/cross.png" /></a>
+          </td>
+        </tr>
+        
+        <tr tal:repeat="detail detail/log">
+          <td style="width:80px;">${detail/type}</td>
+          <td style="width:600px;">${structure detail/message}</td>
+          <td style="width:100px;">${detail/datetime}</td>
+        </tr>
+      </table>
+  </div>
+</tal:block>
+
+
+
+<tal:block metal:define-macro="service_log_detail">
+  <div class="list-group margin-b-3" style="overflow: auto;max-height:400px;">
+      <table style="width:99%;">
+        <tr style="background-color:#e3e3e3; font-weight: bold;">
+          <td style="width:200px;">${text/structure_system_date_time | NULL}</td>
+          <td style="width:575px;">${text/structure_system_message | NULL}</td>
+        </tr>
+        
+        <tr tal:repeat="detail detail/log">
+          <td style="width:200px;">${detail/datetime}</td>
+          <td style="width:575px;">${structure detail/message}</td>
+        </tr>
+      </table>
+  </div>
+</tal:block>
+
+
+
+<tal:block metal:define-macro="service_uptime">
+  <div class="list-group margin-b-3">
+      <table>
+        <tr style="background-color:#e3e3e3; font-weight: bold;">
+          <td style="width:200px;">${text/structure_system_date | NULL}</td>
+          <td style="width:600px;">${text/monitor_overview_rtime | NULL}</td>
+        </tr>
+        
+        <tr tal:repeat="uptime server_detail/uptime">
+          <td style="width:200px;">${uptime/date}</td>
+          <td style="width:600px;">${uptime/latency}</td>
+        </tr>        
+      </table>
+  </div>
+</tal:block>
+
+
+
+<tal:block metal:define-macro="dns">
+  <div class="list-group margin-b-3" tal:condition="server_detail/dns | NULL">
+      <table>
+        <tr style="background-color:#e3e3e3; font-weight: bold;">
+          <td>${text/structure_system_dns_info | NULL}</td>
+        </tr>
+        
+        <tr tal:condition="server_detail/dns | NULL" tal:repeat="dns server_detail/dns"> 
+          <td style="width:800px;">
+            <span tal:condition="dns/meldung | NULL">${structure dns/meldung | NULL}<br /></span>
+            
+            <span tal:condition="dns/record | NULL">
+              <span tal:repeat="record dns/record">
+               ${text/structure_system_real_host | NULL} : ${record/host | NULL} - (<a href="${getPath}/inventory/portscan/${record/ip | NULL}">${dns/ip | NULL} - ${text/structure_system_portscan | NULL}</a>)
+              </span>
+            </span>
+            
+            <span tal:condition="not:dns/record | NULL">
+              ${text/structure_system_real_host | NULL}: ${dns/hostname | NULL} - (<a href="${getPath}/inventory/portscan/${dns/ip | NULL}">${dns/ip | NULL} - ${text/structure_system_portscan | NULL}</a>)
+            </span>
+          </td>
+        </tr>
+        
+      </table>
+    
+      <div id="check_container">
+        <div id="check_content"></div>
+      </div>
+  </div>
+</tal:block>
+

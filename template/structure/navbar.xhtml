@@ -1,0 +1,36 @@
+<tal:block metal:define-macro="standard">
+  <nav class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+  	<div class="content">
+
+    	<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="${getPath}">${text/home_first_nav | NULL}</a>
+			</div>
+
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li><a href="${getPath}/server/liste">${text/home_second_nav | NULL}</a></li>
+					<li><a href="${getPath}/vmware/liste">${text/home_third_nav | NULL}</a></li>
+          <li><a href="${getPath}/inventory/index">${text/home_fourth_nav | NULL}</a></li>
+          <li><a href="${getPath}/knowledge/index">${text/home_fifth_nav | NULL}</a></li>
+          <li tal:condition="aSession/DNS_ALERT | NULL"><a href="${getPath}/inventory/crondns" title="${aSession/DNS_ALERT | NULL}"><img src="${getPath}/assets/icons/error.png" /></a></li>
+				</ul>
+        <span tal:condition="aSession/username | NULL" style="float:right;padding-top:18px;font-weight:bold;font-size:1.1em;">
+          <a href="/user/mypage">${text/my_account | NULL}</a> | 
+          <a href="/user/logout">${text/logout | NULL}</a>          
+        </span>
+        <br />
+        <span style="float:right;" tal:repeat="lang aSession/sprachen">
+            <a tal:condition="php: aSession['language'] != lang['id'] | NULL" href="${getPath}${getURL}/language/${lang/id}"><img border="0" src="${getPath}/assets/icons/lang/${lang/id}.gif" /></a>&nbsp;&nbsp;
+          </span>
+			</div>
+			
+		</div>
+    
+	</nav>
+</tal:block>

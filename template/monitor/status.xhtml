@@ -1,0 +1,30 @@
+<tal:block metal:define-macro="standard">
+  
+  <span tal:condition="page_reload | NULL">
+    <script type = "text/javascript">
+      startTimer(${page_reload});
+    </script>
+    <meta http-equiv="refresh" content="${page_reload | NULL}; URL=${getPath}${getURL}" />
+  </span>
+  
+  <div class="well"><b>${status_title | NULL} -${text/monitor_overview_last_text | NULL} : ${psm_last_update/last_update | NULL} - ${text/monitior_overview_page_refresh | NULL}: <span id="countdown">${page_reload | NULL}</span> </b>${text/monitior_overview_seconds | NULL}</div>
+  
+  <div class="entity-container">
+    <span tal:condition="server_liste | NULL" tal:repeat="server server_liste">
+      <div class="${server/status | NULL}line" style="width:171px;">
+        <div class="entity" title="${server/status_title | NULL}" onclick="window.location.href='${getPath}/${server/serverart}/detail/${server/id | NULL}'">
+          <h4 style="font-size:1.0em; font-weight:bold;">${server/hostname}</h4>
+          <p>${server/bezeichnung}</p>
+          <p>${text/monitor_status_number_monitoring | NULL}: ${server/anzahl_monitor | NULL}</p>
+          
+            ${text/monitior_overview_ip | NULL}: ${server/ipadressen}
+            <span tal:condition="php:_SESSION['admin'] == True' | NULL" style="float:right;"><a href="${getPath}/${server/serverart}/edit/${server/id}"><img src="${getPath}/assets/icons/page_white_edit.png" /></a></span>
+          
+        </div>
+      </div>
+    </span>    
+  </div>
+  
+</tal:block>
+
+

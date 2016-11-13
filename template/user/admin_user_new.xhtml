@@ -1,0 +1,107 @@
+<tal:block metal:define-macro="standard">
+
+  	<div class="row">
+		<div class="col-sm-8 col-sm-push-4">
+      
+      <div tal:condition="save | NULL" class="btn btn-success" style="width:100%;margin-bottom: 25px;">${text/user_admin_data_saved | NULL}</div>
+      <div tal:condition="password_error | NULL" class="btn btn-danger" style="width:100%;margin-bottom: 25px;">${text/user_admin_wrong_password | NULL}</div>
+      
+      <form name="edit" method="post" action="${getPath}/user/admin_user_new/save">
+        <table>
+          <tr style="background-color:#e3e3e3; font-weight: bold;">
+            <td colspan="2">${text/user_admin_general_data | NULL}</td>
+          </tr>
+          
+          <tr>
+            <td style="width:25%;">${text/user_admin_salutation | NULL}</td>
+            <td style="width:75%;">
+              <select class="form-control" name="private[salutation]" size="1">
+                <option value="Herr">${text/user_admin_man | NULL}</option>
+                <option value="Frau">${text/user_admin_woman | NULL}</option>
+              </select>
+            </td>
+          </tr>
+        
+          <tr>
+            <td>${text/user_admin_last_name | NULL}</td>
+            <td><input type="text" name="private[lastname]" id="contactEmail" class="form-control" value="${daten/private/lastname | NULL}" /></td>
+          </tr>
+          
+          <tr>
+            <td>${text/user_admin_first_name | NULL}</td>
+            <td><input type="text" name="private[firstname]" id="contactEmail" class="form-control" value="${daten/private/firstname | NULL}" /></td>
+          </tr>
+          
+          <tr>
+            <td>${text/user_admin_company | NULL}</td>
+            <td><input type="text" name="private[company]" id="contactEmail" class="form-control" value="${daten/private/company | NULL}" /></td>
+          </tr>
+        </table><br />
+          
+        <table>          
+          <tr style="background-color:#e3e3e3; font-weight: bold;">
+            <td colspan="2">${text/user_admin_contact_info | NULL}</td>
+          </tr>
+        
+          <tr>
+            <td style="width:25%;">${text/user_admin_email | NULL}</td>
+            <td style="width:75%;"><input type="text" name="contact[email]" id="contactEmail" class="form-control" value="${daten/contact/email | NULL}" /></td>
+          </tr>
+          
+          <tr>
+            <td>${text/user_admin_push_api_key | NULL}</td>
+            <td><input type="text" name="contact[pushover]" id="contactEmail" class="form-control" value="${daten/contact/pushover | NULL}" /></td>
+          </tr>
+        </table><br />
+          
+        <table>
+          <tr style="background-color:#e3e3e3; font-weight: bold;">
+            <td colspan="2">${text/user_admin_change_password | NULL}</td>
+          </tr>
+        
+          <tr>
+            <td style="width:25%;">${text/user_admin_enter_password | NULL}</td>
+            <td style="width:75%;"><input type="password" name="password_1" id="contactEmail" class="form-control" /></td>
+          </tr>
+          
+          <tr>
+            <td>${text/user_admin_confirm_pw | NULL}</td>
+            <td><input type="password" name="password_2" id="contactEmail" class="form-control" /></td>
+          </tr>
+        </table><br />
+        
+        <table>
+          <tr style="background-color:#e3e3e3; font-weight: bold;">
+            <td colspan="2">${text/user_admin_change_password | NULL}</td>
+          </tr>
+          
+          <tr>
+            <td style="width:25%;">${text/inventory_hardware_assignment | NULL}</td>
+            <td style="width:75%;">
+              <select class="form-control" name="rechte" size="1">
+                <option value="adm">${text/user_admin_admin | NULL}</option>
+                <option value="mod">${text/user_admin_manager | NULL}</option>
+                <option value="usr">${text/user_admin_user | NULL}</option>
+              </select>
+            </td>
+          </tr>
+        </table><br />
+          
+      <button type="submit" class="btn btn-success" style="width:200px;float:left;">${text/user_admin_save_data | NULL}</button>
+      <a href="javascript:history.back();" class="btn btn-danger show-modal" style="width:200px;float:right;">${text/system_cancel | NULL}</a>
+      </form>
+    </div>
+		
+    <div class="col-sm-4 col-sm-pull-8">
+      <tal:block metal:use-macro="structure/submenu.xhtml/user"></tal:block>
+        <span tal:condition="admin | NULL">
+      <tal:block metal:use-macro="structure/submenu.xhtml/admin"></tal:block>
+      </span>
+      <tal:block metal:use-macro="structure/panel.xhtml/standard"></tal:block>
+    </div>
+	</div>
+
+  <script src="${getPath}/assets/javascript/bootstrap.min.js"></script>
+  <a name="bottom"></a>
+
+</tal:block>

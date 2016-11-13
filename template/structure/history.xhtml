@@ -1,0 +1,66 @@
+<tal:block metal:define-macro="standard">
+
+  <link href="${getPath}/assets/javascript/jqplot/jquery.jqplot.min.css" rel="stylesheet" />
+  <!--[if lt IE 9]><script type="text/javascript" src="static/plugin/excanvas.js"></script><![endif]-->
+  <script type="text/javascript" src="${getPath}/assets/javascript/jqplot/jquery.jqplot.min.js"></script>
+  <script type="text/javascript" src="${getPath}/assets/javascript/jqplot/jqplot.canvasOverlay.min.js"></script>
+  <script type="text/javascript" src="${getPath}/assets/javascript/jqplot/jqplot.cursor.min.js"></script>
+  <script type="text/javascript" src="${getPath}/assets/javascript/jqplot/jqplot.dateAxisRenderer.min.js"></script>
+  <script type="text/javascript" src="${getPath}/assets/javascript/jqplot/jqplot.highlighter.min.js"></script>
+
+  <link href="${getPath}/assets/css/history.css" rel="stylesheet" />
+  <script type="text/javascript">
+    var day_format = '${graphs/day_format}';
+    var long_date_format = '${graphs/long_date_format}';
+    var short_date_format = '${graphs/short_date_format}';
+    var short_time_format = '${graphs/short_time_format}';
+  </script>
+  <script type="text/javascript" src="${getPath}/assets/javascript/history.js"></script>
+
+  <div class="list-group margin-b-3">
+    <table>
+      <tr style="background-color:#e3e3e3; font-weight: bold;">
+        <td style="width:850px;">${text/structure_history_availability | NULL}</td>
+      </tr>
+
+      <tr>
+        <td style="width:850px;">
+
+          <div id="history-panel" tal:repeat="graph graphs/graphs">
+            <div class="chart-row">
+              <div class="chart-container">
+                <div class="chart-content">
+                  <div id="chart${graph/chart_id}" class="chart" data-title="${graph/title}" data-plotMode="${graph/plotmode}" data-endTime="${graph/end_timestamp}" data-lines="${graph/server_lines}" data-down="${graph/server_down}"></div>
+                </div>
+              </div>
+              <div class="info-container">
+                <div class="info-content">
+                  <div class="info-dropdown btn-group">
+                    <button class="btn dropdown-toggle" data-toggle="dropdown"><i class="icon-info-sign"></i></button>
+                    <ul class="dropdown-menu">
+                      <li tal:repeat="record graph/info"><span>${record/label}: ${record/value}</span></li>
+                    </ul>
+                  </div>
+                  <div class="server-info">
+                    <ul>
+                     <li tal:repeat="record graph/info"><span>${record/label}: ${record/value}</span></li>
+                    </ul>
+                  </div>
+                </div>                
+                <div class="chart-selector">
+                  <div class="btn-group">
+                    <button tal:repeat="button graph/buttons" class="btn ${button/class_active | NULL}" data-chartId="${graph/chart_id}" data-chartMode="${button/mode}" >${button/label}</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div style="clear: both;">&nbsp;</div>
+          </div>
+
+        </td>
+      </tr>
+    </table>
+  </div>
+
+
+</tal:block>

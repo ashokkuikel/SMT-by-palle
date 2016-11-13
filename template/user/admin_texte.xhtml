@@ -1,0 +1,87 @@
+<tal:block metal:define-macro="standard">
+
+  <div class="row">
+		<div class="col-sm-8 col-sm-push-4">
+      <div class="list-group margin-b-3">
+        <form name="config" method="post" action="${getPath}${getURL}/new">
+          <table>
+            <tr style="background-color:#e3e3e3; font-weight: bold;">
+              <td colspan="3">${text/user_admin_texte_installed | NULL}</td>
+            </tr>
+
+            <tr>
+              <td>
+                <a style="margin-right:15px;" onclick="return confirm('${text/user_admin_texte_installing | NULL}');" href="${getPath}${getURL}/install/${lang/id}" tal:repeat="lang texte_inaktiv">
+                  <img src="${getPath}/assets/icons/lang/${lang/id}.gif" />
+                </a>
+                <br />
+                ${text/user_admin_texte_hinweis | NULL}
+              </td>
+            </tr>
+
+          </table><br />
+        </form>
+        
+        <br />
+        
+        
+        <form name="config" method="post" action="${getPath}${getURL}/new">
+          <input type="hidden" name="sprache" value="${sprache}" />
+          <table>
+            <tr style="background-color:#e3e3e3; font-weight: bold;">
+              <td colspan="3">${text/user_admin_texte_new | NULL}</td>
+            </tr>
+
+            <tr>
+              <td style="width:30%;"><input type="text" name="text_name" class="form-control" placeholder="${text/user_admin_name | NULL}"/></td>
+              <td style="width:60%;"><input type="text" name="text_value" class="form-control" placeholder="${text/user_admin_inventory | NULL}" /></td>
+              <td style="width:10%;"><button type="submit" class="btn btn-success" style="width:90px;margin-left: 5px;">${text/admin_text_save | NULL}</button></td>
+            </tr>
+
+          </table><br />
+        </form>
+        
+        <br />
+        
+        <form name="config" method="post" action="${getPath}${getURL}/save">
+          <input type="hidden" name="sprache" value="${sprache}" />
+          <table>
+            <tr style="background-color:#e3e3e3; font-weight: bold;">
+              <td colspan="2">${text/admin_texte_edit | NULL} - ${text/admin_language | NULL}: &nbsp;
+                <span tal:repeat="lang aSession/sprachen">
+                  <a title="${text/user_admin_text_edit | NULL}" href="${getPath}/user/admin_texte/${lang/id}"><img border="0" src="${getPath}/assets/icons/lang/${lang/id}.gif" /></a>&nbsp;&nbsp;
+                </span>
+              </td>
+            </tr>
+
+            <tr tal:repeat="texte texte">
+              <td style="width:30%;">
+                <a onclick="return confirm('${text/user_admin_text_delete | NULL}');" href="${getPath}${getURL}/delete/${texte/id}"><img src="${getPath}/assets/icons/del.png" /></a>
+                ${texte/text_name | NULL}
+              </td>
+              <td style="width:70%;">
+                <textarea name="${texte/id | NULL}" class="form-control">${texte/text_value | NULL}</textarea>
+              </td>
+            </tr>
+
+          </table><br />
+          <button type="submit" class="btn btn-success" style="width:200px;float:left;">${text/user_admin_news_submit_edit | NULL}</button>
+          <a href="${getPath}" class="btn btn-danger show-modal" style="width:200px;float:right;">${text/system_cancel | NULL}</a>
+        </form>
+      </div>
+    </div>
+    
+		
+    <div class="col-sm-4 col-sm-pull-8">
+      <tal:block metal:use-macro="structure/submenu.xhtml/user"></tal:block>
+      <span tal:condition="admin | NULL">
+        <tal:block metal:use-macro="structure/submenu.xhtml/admin"></tal:block>
+      </span>
+      <tal:block metal:use-macro="structure/panel.xhtml/standard"></tal:block>
+    </div>
+	</div>
+
+  <script src="${getPath}/assets/javascript/bootstrap.min.js"></script>
+  <a name="bottom"></a>
+  
+</tal:block>

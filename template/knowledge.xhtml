@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <tal:block metal:use-macro="structure/metatags.xhtml/standard"></tal:block>
+
+  <body>
+	  <tal:block metal:use-macro="structure/navbar.xhtml/standard"></tal:block>
+		<div class="content">
+
+			<div class="row">
+        <div class="col-sm-8 col-sm-push-4" tal:condition="index | NULL">
+          
+				</div>
+        
+				<div class="col-sm-8 col-sm-push-4" tal:condition="show | NULL">
+          <h4>
+            ${content_knowledge/page_name | NULL} - ${content_knowledge/datum | NULL}
+            <span tal:condition="php:_SESSION['admin'] == True' | NULL" style="float:right;">
+              <a href="${getPath}/knowledge/edit/${content_knowledge/id | NULL}"><img src="${getPath}/assets/icons/page_white_edit.png" /></a>
+              <a title="${text/template_knowledge_del | NULL}" href="${getPath}/knowledge/delete/${content_knowledge/id | NULL}" onclick="return confirm('${text/user_admin_news_link_del | NULL}');"><img src="${getPath}/assets/icons/del.png" /></a>
+            </span>
+          </h4>
+          <span tal:content="structure content_knowledge/page_content | NULL" /><hr />
+          <b>${text/inventory_license_version | NULL}: ${content_knowledge/version | NULL} - ${text/template_knowledge_fast_words | NULL}:</b> ${content_knowledge/keywords | NULL}
+				</div>
+        
+        <div class="col-sm-8 col-sm-push-4" tal:condition="edit | NULL">
+          <tal:block metal:use-macro="structure/metatags.xhtml/editor"></tal:block>
+          <form name="edit" method="post" action="${getPath}/knowledge/save/${content_knowledge/id}" enctype="multipart/form-data">
+            <input type="hidden" name="version" value="${content_knowledge/version}" />
+            <input type="text" name="page_name" class="form-control" value="${content_knowledge/page_name | NULL}"  placeholder="${text/template_inventory_site_menu | NULL}" /><br />
+            <textarea name="page_content" class="form-control" id="contactComment" style="height:650px;font-size:0.9em;">${content_knowledge/page_content | NULL}</textarea><br />
+            <input type="text" name="keywords" class="form-control" value="${content_knowledge/keywords | NULL}" placeholder="${text/template_inventory_search_help | NULL}" /><br />
+            <button type="submit" class="btn btn-success" style="width:200px;float:left;">${text/template_inventory_save_contributio | NULL}</button>
+            <a href="javascript:history.back();" class="btn btn-danger show-modal" style="width:200px;float:right;">${text/system_cancel | NULL}</a>
+          </form>
+				</div>
+        
+        <div class="col-sm-8 col-sm-push-4" tal:condition="new | NULL">
+          <tal:block metal:use-macro="structure/metatags.xhtml/editor"></tal:block>
+          <form name="new" method="post" action="${getPath}/knowledge/save" multipart="" enctype="multipart/form-data">
+            <input type="text" name="page_name" class="form-control" placeholder="${text/template_inventory_site_menu | NULL}" /><br />
+            <textarea name="page_content" class="form-control" id="contactComment" style="height:650px;font-size:0.9em;"></textarea><br />
+            <input type="text" name="keywords" class="form-control" placeholder="${text/template_inventory_search_help | NULL}" /><br />
+            <button type="submit" class="btn btn-success" style="width:200px;float:left;">${text/template_inventory_save_contributio | NULL}</button>
+            <a href="javascript:history.back();" class="btn btn-danger show-modal" style="width:200px;float:right;">${text/system_cancel | NULL}</a>
+          </form>
+				</div>
+        
+				<div class="col-sm-4 col-sm-pull-8">
+          <tal:block metal:use-macro="structure/search.xhtml/standard"></tal:block>
+          <tal:block metal:use-macro="structure/submenu.xhtml/knowledge"></tal:block>
+          <tal:block metal:use-macro="structure/panel.xhtml/standard"></tal:block>
+        </div>
+			</div>
+		</div>
+
+	  <script src="${getPath}/assets/javascript/bootstrap.min.js"></script>
+    <a name="bottom"></a>
+  </body>
+</html>

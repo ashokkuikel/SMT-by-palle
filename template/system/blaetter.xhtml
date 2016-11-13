@@ -1,0 +1,21 @@
+<tal:block metal:define-macro="standard">
+
+  <span tal:condition="page | NULL"> 
+    <a tal:condition="php:isset(page['prev']) | NULL" href="${getPathUrl}/${controller | NULL}/${methode | NULL}/${page/prev}" class="seiten_wahl_prev"><img alt="${text/system_blaetter_alt_next | NULL}" src="${getPath}/assets/icons/left.png" /></a> 
+    <img tal:condition="php:!isset(page['prev']) & page['prev'] > 0 | NULL" alt="${text/system_blaetter_alt | NULL}" src="${getPath}/assets/icons/blank_left.png" />
+    &nbsp;&nbsp;&nbsp;
+  </span>
+
+  <span tal:condition="page/Blaetter | NULL" tal:repeat="blaetter page/Blaetter"> 
+    <a class="seiten_wahl_button" href="${getPath}/${getURL}/page/${blaetter/nummer}">${blaetter/nummer}</a>
+  </span>
+
+  <span tal:condition="page | NULL"> 
+    <a tal:condition="page/next | NULL" href="${getPathUrl}/${controller | NULL}/${methode | NULL}/${page/next}" class="seiten_wahl_next"><img alt="${text/system_blaetter_alt_next | NULL}" src="${getPath}/assets/icons/right.png" /></a> 
+    <img tal:condition="not:page/next | NULL" alt="${text/system_blaetter_alt | NULL}" src="${getPath}/assets/icons/blank_right.png" /> &nbsp;
+  </span>
+
+  <span tal:condition="page | NULL">${text/system_blaetter_entry | NULL}  ${page/start | NULL}
+   ${text/system_blaetter_until | NULL}  ${page/ende | page/treffer} ${text/system_blaetter_from | NULL} ${page/treffer | NULL} </span>
+
+</tal:block>

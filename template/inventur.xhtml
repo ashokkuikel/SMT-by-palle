@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <tal:block metal:use-macro="structure/metatags.xhtml/standard"></tal:block>
+
+  <body>
+	  
+    <form name="iventur" method="post" action="${getPath}${getURL}/scan">
+       <table style="width:99%;">
+          <tr style="background-color:#e3e3e3; font-weight: bold;">
+            <td style="width:5%;"><a href="${getPath}"><img style="height:32px;" src="${getPath}/assets/icons/exit.jpg" /></a></td>
+            <td style="width:30%;"><input type="text" name="barcode" id="contactEmail" class="form-control" autofocus="autofocus" autocomplete="off" /></td>
+            <td style="width:65%;"><a style="float:right" href="${getPath}/inventur/clear" onclick="return confirm('${text/template_inventory_warning | NULL}');">${text/template_inventory_clear | NULL}</a></td> 
+          </tr>
+       </table>
+    </form>
+
+    <span tal:repeat="hardware hardware">
+      <div class="${hardware/status | NULL}line" style="width:100px; max-height: 60px;">
+        <div class="entity" style="border-radius: 5px;margin-right: 0px;margin-bottom: 0px;min-height: 60px;cursor: default;">
+          <h4 style="font-size:1.0em; font-weight:bold;">${hardware/bezeichnung} </h4>
+          <p>${text/template_inventory_user | NULL}: ${hardware/zuordnung}</p>
+          <p>${hardware/kategorie | NULL}</p>
+        </div>
+      </div>
+    </span>
+		
+	  <script src="${getPath}/assets/javascript/jquery-1.11.2.min.js"></script>
+    <script src="${getPath}/assets/javascript/bootstrap.min.js"></script>
+  </body>
+</html>

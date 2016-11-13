@@ -1,0 +1,61 @@
+<tal:block metal:define-macro="standard">
+
+  <div tal:condition="error | NULL" class="error">${error}</div>
+
+  <div tal:condition="meldung | NULL" class="success" id="meldung">
+    <img style="vertical-align: middle;" src="${getPath}/assets/icons/accept.png" /> ${meldung}
+  </div>
+
+
+  <form name="galerie" method="post" action="${getPath}/admin/galerie/create" tal:condition="not:read | NULL">
+    <table class="data-table">
+      <tr>
+        <th>Eine neue Galerie erstellen (Unterstrich _ als Leerzeichen
+          benutzen)</th>
+      </tr>
+
+      <tr>
+        <td>Name der Galerie: <input type="text" name="galerie" style="width: 200px;" /> <input class="button" type="submit" value="Galerie erstellen" /> (Keine Sonderzeichen)
+        </td>
+      </tr>
+    </table>
+  </form>
+
+
+  <form name="upload" method="post" action="${getPath}${getURL}/upload" enctype="multipart/form-data" tal:condition="read | NULL">
+    <input type="hidden" name="ordner" value="${read}" />
+    <table class="data-table">
+      <tr>
+        <th>Ein neues Bild in die Galerie <i>${read}</i> hochladen (Max: ${maxsize}Byte)
+          <div style="float: right;">
+            <a
+              onclick="return confirm('Je nach Anzahl der Bilder kann es dauern, \ndie Seite lädt automatisch neu wenn der Import abgeschlossen ist');" href="${getPath}${getURL}/import">Bilder importieren</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+            <a
+              onclick="return confirm('Es wird die komplette Galerie inklusive alle Bilder geloescht');" href="${getPath}${getURL}/delete">Diese Galerie löschen</a>
+          </div>
+        </th>
+      </tr>
+
+      <tr>
+        <td>Bild hochladen: <input name="pic" type="file" /> 
+          <input class="button" type="submit" value="Bild jetzt hochladen" /> (JPG
+          | JPEG Format)
+        </td>
+      </tr>
+    </table>
+  </form>
+
+
+  <span tal:condition="ordner | NULL">
+    <div style="float: left; width: 175px; margin: 10px; text-align: center;" tal:condition="not:read | NULL" tal:repeat="ordner ordner">
+      <img src="${getPath}/assets/images/fussball/ordner.png" /><br /> <a href="${getPath}${getURL}/${ordner/ordner}">${ordner/name}</a>
+    </div>
+  </span>
+
+  <span tal:repeat="bilder bilder" tal:condition="bilder | NULL">
+    <a onclick="return confirm('Soll dieser Eintrag wirklich gelöscht werden ???\nDer Inhalt ist dann unwiderruflich weg!!!');" class="flickr-thumbnail" href="${getPath}/admin/galerie${read}/delete/${bilder/delete}"> 
+      <img alt="${bilder/name}" src="${getPath}/template/${template}/content/galerie${bilder/name}" />
+    </a>
+  </span>
+
+</tal:block>

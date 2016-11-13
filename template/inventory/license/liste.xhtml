@@ -1,0 +1,49 @@
+<tal:block metal:define-macro="standard">
+
+  <div class="list-group margin-b-3">
+    <table>
+      <tr style="background-color:#e3e3e3; font-weight: bold;">
+        <td style="width:50px;">${text/inventory_license_list_number | NULL}</td>
+        <td style="width:300px;">${text/inventory_license_list_product | NULL}</td>
+        <td style="width:350px;">${text/inventory_license_list_key | NULL}</td>
+        <td style="width:100px;">${text/inventory_hardware_assignment | NULL}</td>
+        <td style="width:60px;">
+          <span style="float:right">
+            <a tal:condition="php:_SESSION['admin'] == True' | NULL" title="${text/structure_new_license | NULL}" href="${getPath}/inventory/license/new"><img border="0" src="${getPath}/assets/icons/add.png"/></a>
+          </span>
+        </td>
+      </tr>
+
+      <tr tal:repeat="list liste">
+        <td style="width:50px;">${list/anzahl}</td>
+        <td style="width:300px;">${list/hersteller} ${list/produkt} ${list/version}</td>
+        <td style="width:350px;">${list/licensekey}</td>
+        <td style="width:100px;">${list/zuordnung}</td>
+        <td style="width:60px;">
+          <span tal:condition="php:_SESSION['admin'] == True' | NULL">
+            <a title="${text/vmware_detail_edit | NULL}" href="${getPath}/inventory/license/edit/${list/id}"><img src="${getPath}/assets/icons/page_white_edit.png" /></a>
+            &nbsp;
+            <a title="${text/structur_system_del | NULL}" href="${getPath}/inventory/license/delete/${list/id}" onclick="return confirm('${text/inventory_hardware_delete | NULL}');"><img src="${getPath}/assets/icons/del.png" /></a>
+          </span>
+        </td>
+      </tr>
+    </table>
+  </div> 
+  
+  <div class="list-group margin-b-3" tal:condition="Blaetter | NULL">
+    <table>
+      <tr style="background-color:#e3e3e3; font-weight: bold;">
+        <td style="width:283px;text-align:left;">
+          <a class="btn btn-primary" tal:condition="php:aSession['db_limit']['prev'] >= 0 | NULL" href="${getPath}/${controller}/${methode}/liste/${aSession/db_limit/prev}">${text/system_previous_page | NULL}</a>
+          <span tal:condition="php:aSession['db_limit']['prev'] < 0 | NULL">${text/system_previous_page | NULL}</span>
+        </td>
+        <td style="width:283px;text-align:center;">${aSession/db_summe | NULL} ${text/system_total_records | NULL}</td>
+        <td style="width:283px;text-align:right;">
+          <a class="btn btn-primary" tal:condition="php:aSession['db_limit']['next'] < aSession['db_summe'] | NULL" href="${getPath}/${controller}/${methode}/liste/${aSession/db_limit/next}">${text/system_next_page | NULL}</a>
+          <span tal:condition="php:aSession['db_limit']['next'] > aSession['db_summe'] | NULL">${text/system_next_page | NULL}</span>
+        </td>
+      </tr>
+    </table>
+  </div>
+  
+</tal:block>

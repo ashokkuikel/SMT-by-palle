@@ -1,0 +1,67 @@
+<tal:block metal:define-macro="standard">
+  
+  <div class="list-group margin-b-3">
+      <table>
+        <tr style="background-color:#e3e3e3; font-weight: bold;">
+          <td colspan="7" style="width:850px;">
+            ${text/structure_list_system_configuration | NULL}
+            <span style="float:right">
+              <a tal:condition="php:_SESSION['admin'] == True' | NULL" title="${text/structure_service_new | NULL}" href="${getPath}/monitor/service/new/${server_detail/id | NULL}"><img border="0" src="${getPath}/assets/icons/add.png"/></a>
+            </span>
+          </td>
+        </tr>
+        
+        <tr tal:condition="server_detail/services | NULL" tal:repeat="liste server_detail/services">
+          <td style="width:25px;">
+            <img tal:condition="php:liste['active'] == 'yes' | NULL" border="0" style="width:20px;height:20px;" src="${getPath}/assets/images/${liste/status}.png" />
+          </td>
+          <td style="width:420px;"><a href="${getPath}/monitor/detail/${liste/server_id}">${liste/label}</a></td>
+          <td style="width:100px;">${liste/type}</td>
+          <td style="width:75px;">${liste/port}</td>
+          <td style="width:125px;">${liste/last_online}</td>
+          <td style="width:55px;">
+            <img title="${text/structure_activ_monitoring | NULL}" tal:condition="php:liste['active'] == 'yes' | NULL" src="${getPath}/assets/images/monitor.png" />
+            <img title="${text/structure_email_message_on | NULL}" tal:condition="php:liste['email'] == 'yes' | NULL" src="${getPath}/assets/images/email.png" />
+            <img title="${text/structure_push_message_on | NULL}" tal:condition="php:liste['pushover'] == 'yes' | NULL" src="${getPath}/assets/images/pushover.png" />
+          </td>
+          <td style="width:50px; text-align:right;">
+            <span tal:condition="php:_SESSION['admin'] == True' | NULL">
+              <a title="${text/vmware_detail_edit | NULL}" href="${getPath}/monitor/service/edit/${liste/server_id}"><img src="${getPath}/assets/icons/page_white_edit.png" /></a>&nbsp;
+              <a title="${text/structure_del_service | NULL}" href="${getPath}/monitor/service/delete/${liste/server_id}" onclick="return confirm('${text/inventory_hardware_delete | NULL}');"><img src="${getPath}/assets/icons/del.png" /></a>
+            </span>
+          </td>
+        </tr>
+      </table>
+  </div>
+  
+  <div class="list-group margin-b-3" tal:condition="server_detail/relations | NULL">
+      <table>
+        <tr style="background-color:#e3e3e3; font-weight: bold;">
+          <td colspan="7" style="width:850px;">${text/structure_list_depende_system | NULL}
+            <span style="float:right">
+              <a tal:condition="php:_SESSION['admin'] == True' | NULL" title="${text/structure_form_new_dep | NULL}" href="${getPath}/monitor/service/new/${server_detail/id}#relation"><img border="0" src="${getPath}/assets/icons/add.png"/></a>
+            </span>
+        </td>
+        </tr>
+        
+        <tr tal:repeat="liste server_detail/relations">
+          <td style="width:25px;">
+            <img tal:condition="php:liste['active'] == 'yes' | NULL" border="0" style="width:20px;height:20px;" src="${getPath}/assets/images/${liste/status}.png" />
+          </td>
+          <td style="width:420px;"><a href="${getPath}/monitor/detail/${liste/server_id}">${liste/label}</a></td>
+          <td style="width:100px;">${liste/type}</td>
+          <td style="width:75px;">${liste/port}</td>
+          <td style="width:125px;">${liste/last_online}</td>
+          <td style="width:55px;">
+            <img title="${text/structure_activ_monitoring | NULL}" tal:condition="php:liste['active'] == 'yes' | NULL" src="${getPath}/assets/images/monitor.png" />
+            <img title="${text/structure_email_message_on | NULL}" tal:condition="php:liste['email'] == 'yes' | NULL" src="${getPath}/assets/images/email.png" />
+            <img title="${text/structure_push_message_on | NULL}" tal:condition="php:liste['pushover'] == 'yes' | NULL" src="${getPath}/assets/images/pushover.png" />
+          </td>
+          <td style="width:50px; text-align:right;">
+            <a tal:condition="php:_SESSION['admin'] == True' | NULL" title="${text/structure_depende_del | NULL}" href="${getPath}/monitor/service/delete_relation/${server_detail/id}/${liste/server_id}" onclick="return confirm('${text/structure_list_delet | NULL}');"><img src="${getPath}/assets/icons/del.png" /></a>
+          </td>
+        </tr>
+      </table>
+  </div>
+  
+</tal:block>

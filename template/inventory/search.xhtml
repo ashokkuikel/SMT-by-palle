@@ -1,0 +1,11 @@
+<tal:block metal:define-macro="standard">
+  
+  <span tal:condition="tal_art | NULL">
+    <tal:block metal:use-macro="structure/${list_art}.xhtml/${tal_art}"></tal:block>
+  </span>
+  
+  <span tal:condition="not:tal_art | NULL">
+    <tal:block metal:use-macro="structure/${list_art}.xhtml/standard"></tal:block>
+  </span>
+  
+</tal:block>

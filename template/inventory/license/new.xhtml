@@ -1,0 +1,79 @@
+<tal:block metal:define-macro="standard">
+
+  <div class="list-group margin-b-3">
+    <form id="config" name="lizenz" method="post" action="${getPath}${getURL}/save">
+      <table>
+        <tr style="background-color:#e3e3e3; font-weight: bold;">
+          <td colspan="2">${text/inventory_license_license_data | NULL}</td>
+        </tr>
+        
+        <tr>
+          <td style="width:200px;">${text/inventory_license_barcode | NULL}</td>
+          <td style="width:600px;"><input type="text" name="barcode" id="contactEmail" class="form-control" value="${detail/barcode | NULL}" placeholder="${text/inventory_license_placeholder | NULL}" /></td>
+        </tr>
+        
+        <tr style="background-color:#e3e3e3; font-weight: bold;">
+          <td colspan="2">${text/inventory_license_license_descripti | NULL}</td>
+        </tr>
+        
+        <tr>
+          <td style="width:200px;">${text/inventory_hardware_manufacturer | NULL}</td>
+          <td style="width:600px;"><input type="text" name="hersteller" id="contactEmail" class="form-control" value="${detail/hersteller | NULL}" placeholder="${text/inventory_license_software | NULL}" /></td>
+        </tr>
+        
+        <tr>
+          <td style="width:200px;">${text/inventory_license_list_product | NULL}</td>
+          <td style="width:600px;"><input type="text" name="produkt" value="${detail/produkt | NULL}" class="form-control" placeholder="${text/inventory_license_new_workspace | NULL}" /></td>
+        </tr>
+        
+        <tr>
+          <td style="width:200px;">${text/inventory_license_version | NULL}</td>
+          <td style="width:600px;"><input type="text" name="version" value="${detail/version | NULL}" class="form-control" placeholder="${text/inventory_license_new_version | NULL}"/></td>
+        </tr>
+        
+        <tr style="background-color:#e3e3e3; font-weight: bold;">
+          <td colspan="2">${text/inventory_license_key_number | NULL}</td>
+        </tr>
+        
+         <tr>
+          <td style="width:200px;">${text/inventory_license_licensekey | NULL}</td>
+          <td style="width:600px;"><input type="text" name="licensekey" value="${detail/licensekey | NULL}" class="form-control" /></td>
+        </tr>
+
+        <tr>
+          <td style="width:200px;">${text/inventory_license_list_number | NULL}</td>
+          <td style="width:600px;"><input type="text" name="anzahl" value="${detail/anzahl | NULL}" class="form-control" /></td>
+        </tr>
+        
+        <tr>
+          <td colspan="2" style="width:800px;"><textarea name="beschreibung" class="form-control" id="contactComment" placeholder="${text/inventory_license_comment | NULL}">${detail/beschreibung | NULL}</textarea></td>
+        </tr> 
+        
+        <tr style="background-color:#e3e3e3; font-weight: bold;">
+          <td colspan="2">${text/inventory_license_assigning_license | NULL}</td>
+        </tr>
+        
+        <tr>
+          <td style="width:200px;">${text/inventory_license_new_user | NULL}</td>
+          <td style="width:600px;"><input type="text" name="zuordnung" value="${detail/zuordnung | NULL}" class="form-control" /></td>
+        </tr>
+        
+        <tr>
+          <td style="width:200px;">${text/inventory_license_mapping_image | NULL}</td>
+          <td style="width:600px;">
+            <select class="form-control" name="vmware" size="5">              
+              <option style='background-color:#eeeeee; font-weight:bold; padding:3px;' disabled="disabled">Virtuelle Systeme</option>
+              <option tal:condition="detail | NULL" tal:repeat="liste images" value="${liste/id}" tal:attributes="selected php:detail['vmware'] == liste['id'] | NULL">${liste/bezeichnung}</option>
+              <option tal:condition="not:detail | NULL" tal:repeat="liste images" value="${liste/id}">${liste/bezeichnung}</option>
+            </select>
+          </td>
+        </tr>
+    
+      </table>
+      <br />
+      <button type="submit" class="btn btn-success" style="width:200px;float:left;">${text/inventory_license_new_save | NULL}</button>
+      <a href="javascript:history.back();" class="btn btn-danger show-modal" style="width:200px;float:right;">${text/system_cancel | NULL}</a>
+    </form>
+  </div>
+  
+</tal:block>
