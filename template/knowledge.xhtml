@@ -17,8 +17,8 @@
           <h4>
             ${content_knowledge/page_name | NULL} - ${content_knowledge/datum | NULL}
             <span tal:condition="php:_SESSION['admin'] == True' | NULL" style="float:right;">
-              <a href="${getPath}/knowledge/edit/${content_knowledge/id | NULL}"><img src="${getPath}/assets/icons/page_white_edit.png" /></a>
-              <a title="${text/template_knowledge_del | NULL}" href="${getPath}/knowledge/delete/${content_knowledge/id | NULL}" onclick="return confirm('${text/user_admin_news_link_del | NULL}');"><img src="${getPath}/assets/icons/del.png" /></a>
+              <a type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-edit" aria-hidden="true" href="${getPath}/knowledge/edit/${content_knowledge/id | NULL}" />
+              <a type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-remove" aria-hidden="true" title="${text/template_knowledge_del | NULL}" href="${getPath}/knowledge/delete/${content_knowledge/id | NULL}" onclick="return confirm('${text/user_admin_news_link_del | NULL}');" />
             </span>
           </h4>
           <span tal:content="structure content_knowledge/page_content | NULL" /><hr />

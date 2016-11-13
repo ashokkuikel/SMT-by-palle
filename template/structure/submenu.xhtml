@@ -18,10 +18,8 @@
       <div class="panel-heading">
         <h4 class="panel-title">
           ${text/nav_submenu_knowledge | NULL}
-          <span style="float:right">
-            <a title="${text/structur_del_search | NULL}" tal:condition="aSession/fst |  NULL" href="${getPath}/knowledge/clear"><img style="width:16px;" src="${getPath}/assets/images/clear_filter.png" /></a>
-            <a tal:condition="php:_SESSION['admin'] == True' | NULL" title="${text/structure_new | NULL}" href="${getPath}/knowledge/new"><img border="0" src="${getPath}/assets/icons/add.png"/></a>
-          </span>
+            <a type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-filter" aria-hidden="true" title="${text/structur_del_search | NULL}" tal:condition="aSession/fst |  NULL" href="${getPath}/knowledge/clear" />
+            <a type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-plus" aria-hidden="true" tal:condition="php:_SESSION['admin'] == True' | NULL" title="${text/structure_new | NULL}" href="${getPath}/knowledge/new" />
         </h4>
       </div>
       <div class="panel-body" style="padding:0px;" tal:repeat="submenu submenu_knowledge">

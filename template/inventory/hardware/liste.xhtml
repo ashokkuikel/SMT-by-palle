@@ -3,31 +3,30 @@
   <div class="list-group margin-b-3">
     <table>
       <tr style="background-color:#e3e3e3; font-weight: bold;">
-        <td style="width:125px;"><a href="${getPath}/inventory/hardware/order/kategorie">${text/inventory_hardware_category | NULL}</a></td>
-        <td style="width:200px;"><a href="${getPath}/inventory/hardware/order/hersteller">${text/inventory_hardware_manufacturer | NULL}</a></td>
-        <td style="width:200px;"><a href="${getPath}/inventory/hardware/order/modell">${text/inventory_hardware_model | NULL}</a></td>
-        <td style="width:100px;"><a href="${getPath}/inventory/hardware/order/inventarnummer">${text/inventory_hardware_inventory | NULL}</a></td>
-        <td style="width:100px;"><a href="${getPath}/inventory/hardware/order/zuordnung">${text/inventory_hardware_assignment | NULL}</a></td>
-        <td style="width:100px;"><a href="${getPath}/inventory/hardware/order/kaufdatum">${text/inventory_hardware_date_of_purchase | NULL}</a></td>
-        <td style="width:75px;">
+        <td style="width:15%;"><a href="${getPath}/inventory/hardware/order/kategorie">${text/inventory_hardware_category | NULL}</a></td>
+        <td style="width:20%;"><a href="${getPath}/inventory/hardware/order/hersteller">${text/inventory_hardware_manufacturer | NULL}</a></td>
+        <td style="width:20%;"><a href="${getPath}/inventory/hardware/order/modell">${text/inventory_hardware_model | NULL}</a></td>
+        <td style="width:15%;"><a href="${getPath}/inventory/hardware/order/inventarnummer">${text/inventory_hardware_inventory | NULL}</a></td>
+        <td style="width:10%"><a href="${getPath}/inventory/hardware/order/zuordnung">${text/inventory_hardware_assignment | NULL}</a></td>
+        <td style="width:10%;"><a href="${getPath}/inventory/hardware/order/kaufdatum">${text/inventory_hardware_date_of_purchase | NULL}</a></td>
+        <td style="width:10%;">
           <span style="float:right">
-            <a tal:condition="php:_SESSION['admin'] == True' | NULL" title="${text/structure_new_license | NULL}" href="${getPath}/inventory/hardware/new"><img border="0" src="${getPath}/assets/icons/add.png"/></a>
+            <a type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-plus" aria-hidden="true" tal:condition="php:_SESSION['admin'] == True' | NULL" title="${text/structure_new_license | NULL}" href="${getPath}/inventory/hardware/new" />
           </span>
         </td>
       </tr>
 
       <tr tal:condition="liste | NULL" tal:repeat="list liste">
-        <td style="width:125px;">${list/kategorie | NULL}</td>
-        <td style="width:200px;">${list/hersteller | NULL}</td>
-        <td style="width:200px;">${list/modell | NULL}</td>
-        <td style="width:100px;">${list/inventarnummer | NULL}</td>
-        <td style="width:100px;">${list/zuordnung | NULL}</td>
-        <td style="width:100px;">${list/kaufdatum | NULL}</td>
-        <td style="width:75px;">
-          <span tal:condition="php:_SESSION['admin'] == True' | NULL">
-            <a title="${text/vmware_detail_edit | NULL}" href="${getPath}/${controller}/${methode}/edit/${list/id}"><img src="${getPath}/assets/icons/page_white_edit.png" /></a>
-            &nbsp;
-            <a title="${text/structur_system_del | NULL}" href="${getPath}/${controller}/${methode}/delete/${list/id}" onclick="return confirm('${text/inventory_hardware_delete | NULL}');"><img src="${getPath}/assets/icons/del.png" /></a>
+        <td>${list/kategorie | NULL}</td>
+        <td>${list/hersteller | NULL}</td>
+        <td>${list/modell | NULL}</td>
+        <td>${list/inventarnummer | NULL}</td>
+        <td>${list/zuordnung | NULL}</td>
+        <td>${list/kaufdatum | NULL}</td>
+        <td style="width:10%;">
+          <span tal:condition="php:_SESSION['admin'] == True' | NULL" style="float:right">
+            <a type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-edit" aria-hidden="true" title="${text/vmware_detail_edit | NULL}" href="${getPath}/${controller}/${methode}/edit/${list/id}" />
+            <a type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-remove" aria-hidden="true" title="${text/structur_system_del | NULL}" href="${getPath}/${controller}/${methode}/delete/${list/id}" onclick="return confirm('${text/inventory_hardware_delete | NULL}');" />
           </span>
         </td>
       </tr>

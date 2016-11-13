@@ -13,7 +13,6 @@
           <p>${server/bezeichnung}</p>
           <p>${text/monitior_overview_monitoring | NULL}: ${server/anzahl_monitor | NULL}</p>
           ${text/monitior_overview_ip | NULL}: ${server/ipadressen}
-          <span tal:condition="php:_SESSION['admin'] == True' | NULL" style="float:right;"><a href="${getPath}/${server/serverart}/edit/${server/id}"><img src="${getPath}/assets/icons/page_white_edit.png" /></a></span>
         </div>
       </div>
     </span>      
