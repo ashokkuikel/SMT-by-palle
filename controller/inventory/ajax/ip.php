@@ -58,14 +58,14 @@ function main($ajxData) {
 
   @fclose($fp);
 
-  $return_content = '<table border="0" width="100%"><tr class="list-group-item">';
-  $return_content.= '<td style="width:150px;">' . $ajxData['ip'] . '.' . $ajxData['port'] . '</td>';
-  $return_content.= '<td style="width:200px;">' . $message . '</td>';
-  $return_content.= '<td style="width:300px;">' . $dns . '</td>';
+  $return_content = '<table><tr>';
+  $return_content.= '<td style="width:15%;">' . $ajxData['ip'] . '.' . $ajxData['port'] . '</td>';
+  $return_content.= '<td style="width:35%;">' . $message . '</td>';
+  $return_content.= '<td style="width:30%;">' . $dns . '</td>';
   if ($link === True) {
-    $return_content.= '<td style="width:200px;"><a href="/inventory/portscan/' . $ajxData['ip'] . '.' . $ajxData['port'] . '">Portscan</a></td>';
+    $return_content.= '<td style="width:20%;"><a href="/inventory/portscan/' . $ajxData['ip'] . '.' . $ajxData['port'] . '">Portscan</a></td>';
   } else {
-    $return_content.= '<td style="width:200px;">Portscan</td>';
+    $return_content.= '<td style="width:20%;">Portscan</td>';
   }
   $return_content.= '</tr></table>';
 

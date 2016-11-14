@@ -4,12 +4,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <tal:block metal:use-macro="structure/metatags.xhtml/standard" />
 
-  <body style="margin-top: -68px;">
+  <body style="margin-top: -70px;">
 	  
     <form name="iventur" method="post" action="${getPath}${getURL}/scan">
        <table style="width:99%;">
           <tr style="background-color:#e3e3e3; font-weight: bold;">
-            <td style="width:5%;"><a href="${getPath}"><img style="height:32px;" src="${getPath}/assets/icons/exit.jpg" /></a></td>
+            <td style="width:5%;"><a type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-home" aria-hidden="true" href="${getPath}" /></td>
             <td style="width:30%;"><input type="text" name="barcode" id="contactEmail" class="form-control" autofocus="autofocus" autocomplete="off" /></td>
             <td style="width:65%;"><a style="float:right" href="${getPath}/inventur/clear" onclick="return confirm('${text/template_inventory_warning | NULL}');">${text/template_inventory_clear | NULL}</a></td> 
           </tr>
