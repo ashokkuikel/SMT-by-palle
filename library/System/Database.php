@@ -60,6 +60,7 @@ class Database {
         
       $q = $DB->prepare($query);
       $q->execute($value);
+      
       if (preg_match("/select/i", $query)) {
         $this->value($q);
         $this->count($q);       
