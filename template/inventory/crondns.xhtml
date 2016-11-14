@@ -1,24 +1,22 @@
 <tal:block metal:define-macro="standard">
   
-  <div class="list-group margin-b-3">
-      <table>
-        <tr style="background-color:#e3e3e3; font-weight: bold;">
-          <td style="width:120px;">${text/inventory_host}</td>
-          <td style="width:80px;">${text/inventory_ip}</td>
-          <td style="width:650px;">${text/inventory_message}
-            <span style="float:right;">
-              <a type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-globe" aria-hidden="true" title="${text/inventory_license_update_dns | NULL}" href="${getPath}${getURL}/dnsreload" />
-              <a type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-tasks" aria-hidden="true" title="${text/inventory_license_new_dns_test}" href="${getPath}/cronjob/checkdns/update" />
-            </span>
-          </td>
-        </tr>
-        
-        <tr tal:repeat="liste server_liste">
-          <td style="width:120px;"><a href="${getPath}/${liste/serverart | NULL}/detail/${liste/sid  | NULL}">${liste/hostname | NULL}</a></td>
-          <td style="width:80px;">${liste/ipadresse | NULL}</td>
-          <td style="width:650px;">${structure liste/meldung | NULL}</td>
-        </tr>
-      </table>
-  </div> 
+  <table>
+    <tr style="background-color:#e3e3e3; font-weight: bold;">
+      <td style="width:120px;">${text/inventory_host}</td>
+      <td style="width:80px;">${text/inventory_ip}</td>
+      <td style="width:650px;">${text/inventory_message}
+        <span style="float:right;">
+          <a type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-globe" aria-hidden="true" title="${text/inventory_license_update_dns | NULL}" href="${getPath}${getURL}/dnsreload" />
+          <a type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-tasks" aria-hidden="true" title="${text/inventory_license_new_dns_test}" href="${getPath}/cronjob/checkdns/update" />
+        </span>
+      </td>
+    </tr>
+
+    <tr tal:repeat="liste server_liste">
+      <td style="width:120px;"><a href="${getPath}/${liste/serverart | NULL}/detail/${liste/sid  | NULL}">${liste/hostname | NULL}</a></td>
+      <td style="width:80px;">${liste/ipadresse | NULL}</td>
+      <td style="width:650px;">${structure liste/meldung | NULL}</td>
+    </tr>
+  </table>
   
 </tal:block>

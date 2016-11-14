@@ -1,67 +1,64 @@
 <tal:block metal:define-macro="standard">
   
-  <div class="list-group margin-b-3">
-      <table>
-        <tr style="background-color:#e3e3e3; font-weight: bold;">
-          <td colspan="7">
-            ${text/structure_list_system_configuration | NULL}
-            <span style="float:right">
-              <a type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-plus" aria-hidden="true" tal:condition="php:_SESSION['admin'] == True' | NULL" title="${text/structure_service_new | NULL}" href="${getPath}/monitor/service/new/${server_detail/id | NULL}" />
-            </span>
-          </td>
-        </tr>
-        
-        <tr tal:condition="server_detail/services | NULL" tal:repeat="liste server_detail/services">
-          <td style="width:25px;">
-            <img tal:condition="php:liste['active'] == 'yes' | NULL" border="0" style="width:20px;height:20px;" src="${getPath}/assets/images/${liste/status}.png" />
-          </td>
-          <td style="width:40%;"><a href="${getPath}/monitor/detail/${liste/server_id}">${liste/label}</a></td>
-          <td style="width:10%;">${liste/type}</td>
-          <td style="width:10%;">${liste/port}</td>
-          <td style="width:15%;">${liste/last_online}</td>
-          <td style="width:15%;">
-            <span aria-label="Left Align" class="glyphicon glyphicon-eye-open" aria-hidden="true" title="${text/structure_activ_monitoring | NULL}" tal:condition="php:liste['active'] == 'yes' | NULL" />
-            <span aria-label="Left Align" class="glyphicon glyphicon-envelope" aria-hidden="true" title="${text/structure_email_message_on | NULL}" tal:condition="php:liste['email'] == 'yes' | NULL" />
-            <span aria-label="Left Align" class="glyphicon glyphicon-phone" aria-hidden="true" title="${text/structure_push_message_on | NULL}" tal:condition="php:liste['pushover'] == 'yes' | NULL" />
-          </td>
-          <td style="width:10%; text-align:right;">
-            <span tal:condition="php:_SESSION['admin'] == True' | NULL">
-              <a type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-edit" aria-hidden="true" title="${text/vmware_detail_edit | NULL}" href="${getPath}/monitor/service/edit/${liste/server_id}" />
-              <a type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-remove" aria-hidden="true" title="${text/structure_del_service | NULL}" href="${getPath}/monitor/service/delete/${liste/server_id}" onclick="return confirm('${text/inventory_hardware_delete | NULL}');" />
-            </span>
-          </td>
-        </tr>
-      </table>
-  </div>
+  <table>
+    <tr style="background-color:#e3e3e3; font-weight: bold;">
+      <td colspan="7">
+        ${text/structure_list_system_configuration | NULL}
+        <span style="float:right">
+          <a type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-plus" aria-hidden="true" tal:condition="php:_SESSION['admin'] == True' | NULL" title="${text/structure_service_new | NULL}" href="${getPath}/monitor/service/new/${server_detail/id | NULL}" />
+        </span>
+      </td>
+    </tr>
+
+    <tr tal:condition="server_detail/services | NULL" tal:repeat="liste server_detail/services">
+      <td style="width:25px;">
+        <img tal:condition="php:liste['active'] == 'yes' | NULL" border="0" style="width:20px;height:20px;" src="${getPath}/assets/images/${liste/status}.png" />
+      </td>
+      <td style="width:40%;"><a href="${getPath}/monitor/detail/${liste/server_id}">${liste/label}</a></td>
+      <td style="width:10%;">${liste/type}</td>
+      <td style="width:10%;">${liste/port}</td>
+      <td style="width:15%;">${liste/last_online}</td>
+      <td style="width:15%;">
+        <span aria-label="Left Align" class="glyphicon glyphicon-eye-open" aria-hidden="true" title="${text/structure_activ_monitoring | NULL}" tal:condition="php:liste['active'] == 'yes' | NULL" />
+        <span aria-label="Left Align" class="glyphicon glyphicon-envelope" aria-hidden="true" title="${text/structure_email_message_on | NULL}" tal:condition="php:liste['email'] == 'yes' | NULL" />
+        <span aria-label="Left Align" class="glyphicon glyphicon-phone" aria-hidden="true" title="${text/structure_push_message_on | NULL}" tal:condition="php:liste['pushover'] == 'yes' | NULL" />
+      </td>
+      <td style="width:10%; text-align:right;">
+        <span tal:condition="php:_SESSION['admin'] == True' | NULL">
+          <a type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-edit" aria-hidden="true" title="${text/vmware_detail_edit | NULL}" href="${getPath}/monitor/service/edit/${liste/server_id}" />
+          <a type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-remove" aria-hidden="true" title="${text/structure_del_service | NULL}" href="${getPath}/monitor/service/delete/${liste/server_id}" onclick="return confirm('${text/inventory_hardware_delete | NULL}');" />
+        </span>
+      </td>
+    </tr>
+  </table>
   
-  <div class="list-group margin-b-3" tal:condition="server_detail/relations | NULL">
-      <table>
-        <tr style="background-color:#e3e3e3; font-weight: bold;">
-          <td colspan="7" style="width:850px;">${text/structure_list_depende_system | NULL}
-            <span style="float:right">
-              <a tal:condition="php:_SESSION['admin'] == True' | NULL" title="${text/structure_form_new_dep | NULL}" href="${getPath}/monitor/service/new/${server_detail/id}#relation"><img border="0" src="${getPath}/assets/icons/add.png"/></a>
-            </span>
-        </td>
-        </tr>
-        
-        <tr tal:repeat="liste server_detail/relations">
-          <td style="width:25px;">
-            <img tal:condition="php:liste['active'] == 'yes' | NULL" border="0" style="width:20px;height:20px;" src="${getPath}/assets/images/${liste/status}.png" />
-          </td>
-          <td style="width:40%;"><a href="${getPath}/monitor/detail/${liste/server_id}">${liste/label}</a></td>
-          <td style="width:10%;">${liste/type}</td>
-          <td style="width:10%;">${liste/port}</td>
-          <td style="width:15%;">${liste/last_online}</td>
-          <td style="width:15%;">
-            <span aria-label="Left Align" class="glyphicon glyphicon-eye-open" aria-hidden="true" title="${text/structure_activ_monitoring | NULL}" tal:condition="php:liste['active'] == 'yes' | NULL" />
-            <span aria-label="Left Align" class="glyphicon glyphicon-envelope" aria-hidden="true" title="${text/structure_email_message_on | NULL}" tal:condition="php:liste['email'] == 'yes' | NULL" />
-            <span aria-label="Left Align" class="glyphicon glyphicon-phone" aria-hidden="true" title="${text/structure_push_message_on | NULL}" tal:condition="php:liste['pushover'] == 'yes' | NULL" />
-          </td>
-          <td style="width:10%; text-align:right;">
-            <a tal:condition="php:_SESSION['admin'] == True' | NULL" title="${text/structure_depende_del | NULL}" href="${getPath}/monitor/service/delete_relation/${server_detail/id}/${liste/server_id}" onclick="return confirm('${text/structure_list_delet | NULL}');"><img src="${getPath}/assets/icons/del.png" /></a>
-          </td>
-        </tr>
-      </table>
-  </div>
+
+  <table tal:condition="server_detail/relations | NULL">
+    <tr style="background-color:#e3e3e3; font-weight: bold;">
+      <td colspan="7" style="width:850px;">${text/structure_list_depende_system | NULL}
+        <span style="float:right">
+          <a tal:condition="php:_SESSION['admin'] == True' | NULL" title="${text/structure_form_new_dep | NULL}" href="${getPath}/monitor/service/new/${server_detail/id}#relation"><img border="0" src="${getPath}/assets/icons/add.png"/></a>
+        </span>
+    </td>
+    </tr>
+
+    <tr tal:repeat="liste server_detail/relations">
+      <td style="width:25px;">
+        <img tal:condition="php:liste['active'] == 'yes' | NULL" border="0" style="width:20px;height:20px;" src="${getPath}/assets/images/${liste/status}.png" />
+      </td>
+      <td style="width:40%;"><a href="${getPath}/monitor/detail/${liste/server_id}">${liste/label}</a></td>
+      <td style="width:10%;">${liste/type}</td>
+      <td style="width:10%;">${liste/port}</td>
+      <td style="width:15%;">${liste/last_online}</td>
+      <td style="width:15%;">
+        <span aria-label="Left Align" class="glyphicon glyphicon-eye-open" aria-hidden="true" title="${text/structure_activ_monitoring | NULL}" tal:condition="php:liste['active'] == 'yes' | NULL" />
+        <span aria-label="Left Align" class="glyphicon glyphicon-envelope" aria-hidden="true" title="${text/structure_email_message_on | NULL}" tal:condition="php:liste['email'] == 'yes' | NULL" />
+        <span aria-label="Left Align" class="glyphicon glyphicon-phone" aria-hidden="true" title="${text/structure_push_message_on | NULL}" tal:condition="php:liste['pushover'] == 'yes' | NULL" />
+      </td>
+      <td style="width:10%; text-align:right;">
+        <a tal:condition="php:_SESSION['admin'] == True' | NULL" title="${text/structure_depende_del | NULL}" href="${getPath}/monitor/service/delete_relation/${server_detail/id}/${liste/server_id}" onclick="return confirm('${text/structure_list_delet | NULL}');"><img src="${getPath}/assets/icons/del.png" /></a>
+      </td>
+    </tr>
+  </table>
   
 </tal:block>

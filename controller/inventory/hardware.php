@@ -5,15 +5,6 @@
   $url = base::get('url');
   template::setText('kategorie', explode(',', Base::get('Handler')->config['hardware_kategorie']));
   
-  if (count($url) > 2) {
-    $db_limit['start'] = (int) end($url);
-  } else { $db_limit['start'] = 0; }
-  
-  $db_limit['limit'] = (int) base::get('iAnzahl');
-  $db_limit['next'] = ($db_limit['start'] + $db_limit['limit']);
-  $db_limit['prev'] = ($db_limit['start'] - $db_limit['limit']);
-  $ses->set('db_limit', $db_limit);
-  
   if(isset($url['2'])) {
     
     if($url['2'] == 'new' && end($url) == 'save') {
@@ -42,6 +33,15 @@
     Session::set('order_hardware', end($url));
     header("Location: " . base::get('getPath') . "/" . base::get('controller') . "/" . base::get('methode'));
   }
+  
+  if (count($url) > 2) {
+    $db_limit['start'] = (int) end($url);
+  } else { $db_limit['start'] = 0; }
+  
+  $db_limit['limit'] = (int) base::get('iAnzahl');
+  $db_limit['next'] = ($db_limit['start'] + $db_limit['limit']);
+  $db_limit['prev'] = ($db_limit['start'] - $db_limit['limit']);
+  $ses->set('db_limit', $db_limit);
   
   template::setText('Blaetter', True);
   template::setText('liste', $had->getHardware());

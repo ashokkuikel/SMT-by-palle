@@ -1,32 +1,30 @@
 <tal:block metal:define-macro="standard">
 
-  <div class="list-group margin-b-3">
-    <table>
-      <tr style="background-color:#e3e3e3; font-weight: bold;">
-        <td colspan="6">
-          <a type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-paperclip" aria-hidden="true" href="${getPath}${getURL}/export" title="${text/structure_inv_service_download | NULL}" />
-          ${text/structure_inventory_all_services | NULL}
-        </td>
-      </tr>
+  <table>
+    <tr style="background-color:#e3e3e3; font-weight: bold;">
+      <td colspan="6">
+        <a type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-paperclip" aria-hidden="true" href="${getPath}${getURL}/export" title="${text/structure_inv_service_download | NULL}" />
+        ${text/structure_inventory_all_services | NULL}
+      </td>
+    </tr>
 
-      <tr tal:repeat="liste all_services">
-        <td style="width:30%;">${liste/label}</td>
-        <td style="width:5%;">${liste/type}</td>
-        <td style="width:10%;">${liste/port}</td>
-        <td style="width:15%">${liste/last_online}</td>
-        <td>
-            <span type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-eye-open" aria-hidden="true" title="${text/structure_activ_monitoring | NULL}" tal:condition="php:liste['active'] == 'yes' | NULL" />
-            <span type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-envelope" aria-hidden="true"  title="${text/structure_email_message_on | NULL}" tal:condition="php:liste['email'] == 'yes' | NULL" src="${getPath}/assets/images/email.png" />
-            <span type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-phone" aria-hidden="true" title="${text/structure_push_message_on | NULL}" tal:condition="php:liste['pushover'] == 'yes' | NULL" />
-          </td>
-        <td style="text-align:right;">
-          <span tal:condition="php:_SESSION['admin'] == True' | NULL">
-            <a type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-edit" aria-hidden="true" title="${text/monitor_detail_service_edit | NULL}" href="${getPath}/monitor/service/edit/${liste/server_id}" />
-            <a type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-remove" aria-hidden="true" title="${text/structure_del_service | NULL}" href="${getPath}/monitor/service/delete/${liste/server_id}" onclick="return confirm('${text/inventory_hardware_delete | NULL}');" />
-          </span>
+    <tr tal:repeat="liste all_services">
+      <td style="width:30%;">${liste/label}</td>
+      <td style="width:5%;">${liste/type}</td>
+      <td style="width:10%;">${liste/port}</td>
+      <td style="width:15%">${liste/last_online}</td>
+      <td>
+          <span type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-eye-open" aria-hidden="true" title="${text/structure_activ_monitoring | NULL}" tal:condition="php:liste['active'] == 'yes' | NULL" />
+          <span type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-envelope" aria-hidden="true"  title="${text/structure_email_message_on | NULL}" tal:condition="php:liste['email'] == 'yes' | NULL" src="${getPath}/assets/images/email.png" />
+          <span type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-phone" aria-hidden="true" title="${text/structure_push_message_on | NULL}" tal:condition="php:liste['pushover'] == 'yes' | NULL" />
         </td>
-      </tr>
-    </table>
-  </div>
+      <td style="text-align:right;">
+        <span tal:condition="php:_SESSION['admin'] == True' | NULL">
+          <a type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-edit" aria-hidden="true" title="${text/monitor_detail_service_edit | NULL}" href="${getPath}/monitor/service/edit/${liste/server_id}" />
+          <a type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-remove" aria-hidden="true" title="${text/structure_del_service | NULL}" href="${getPath}/monitor/service/delete/${liste/server_id}" onclick="return confirm('${text/inventory_hardware_delete | NULL}');" />
+        </span>
+      </td>
+    </tr>
+  </table>
   
 </tal:block>

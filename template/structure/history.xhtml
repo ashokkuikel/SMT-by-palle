@@ -17,50 +17,48 @@
   </script>
   <script type="text/javascript" src="${getPath}/assets/javascript/history.js"></script>
 
-  <div class="list-group margin-b-3">
-    <table>
-      <tr style="background-color:#e3e3e3; font-weight: bold;">
-        <td>${text/structure_history_availability | NULL}</td>
-      </tr>
+  <table>
+    <tr style="background-color:#e3e3e3; font-weight: bold;">
+      <td>${text/structure_history_availability | NULL}</td>
+    </tr>
 
-      <tr>
-        <td>
+    <tr>
+      <td>
 
-          <div id="history-panel" tal:repeat="graph graphs/graphs">
-            <div class="chart-row">
-              <div class="chart-container">
-                <div class="chart-content">
-                  <div id="chart${graph/chart_id}" class="chart" data-title="${graph/title}" data-plotMode="${graph/plotmode}" data-endTime="${graph/end_timestamp}" data-lines="${graph/server_lines}" data-down="${graph/server_down}"></div>
-                </div>
+        <div id="history-panel" tal:repeat="graph graphs/graphs">
+          <div class="chart-row">
+            <div class="chart-container">
+              <div class="chart-content">
+                <div id="chart${graph/chart_id}" class="chart" data-title="${graph/title}" data-plotMode="${graph/plotmode}" data-endTime="${graph/end_timestamp}" data-lines="${graph/server_lines}" data-down="${graph/server_down}"></div>
               </div>
-              <div class="info-container">
-                <div class="info-content">
-                  <div class="info-dropdown btn-group">
-                    <button class="btn dropdown-toggle" data-toggle="dropdown"><i class="icon-info-sign"></i></button>
-                    <ul class="dropdown-menu">
-                      <li tal:repeat="record graph/info"><span>${record/label}: ${record/value}</span></li>
-                    </ul>
-                  </div>
-                  <div class="server-info">
-                    <ul>
-                     <li tal:repeat="record graph/info"><span>${record/label}: ${record/value}</span></li>
-                    </ul>
-                  </div>
-                </div>                
-                <div class="chart-selector">
-                  <div class="btn-group">
-                    <button tal:repeat="button graph/buttons" class="btn ${button/class_active | NULL}" data-chartId="${graph/chart_id}" data-chartMode="${button/mode}" >${button/label}</button>
-                  </div>
+            </div>
+            <div class="info-container">
+              <div class="info-content">
+                <div class="info-dropdown btn-group">
+                  <button class="btn dropdown-toggle" data-toggle="dropdown"><i class="icon-info-sign"></i></button>
+                  <ul class="dropdown-menu">
+                    <li tal:repeat="record graph/info"><span>${record/label}: ${record/value}</span></li>
+                  </ul>
+                </div>
+                <div class="server-info">
+                  <ul>
+                   <li tal:repeat="record graph/info"><span>${record/label}: ${record/value}</span></li>
+                  </ul>
+                </div>
+              </div>                
+              <div class="chart-selector">
+                <div class="btn-group">
+                  <button tal:repeat="button graph/buttons" class="btn ${button/class_active | NULL}" data-chartId="${graph/chart_id}" data-chartMode="${button/mode}" >${button/label}</button>
                 </div>
               </div>
             </div>
-            <div style="clear: both;">&nbsp;</div>
           </div>
+          <div style="clear: both;">&nbsp;</div>
+        </div>
 
-        </td>
-      </tr>
-    </table>
-  </div>
+      </td>
+    </tr>
+  </table>
 
 
 </tal:block>

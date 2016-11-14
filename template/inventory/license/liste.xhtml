@@ -1,33 +1,31 @@
 <tal:block metal:define-macro="standard">
 
-  <div class="list-group margin-b-3">
-    <table>
-      <tr style="background-color:#e3e3e3; font-weight: bold;">
-        <td style="width:5%;">${text/inventory_license_list_number | NULL}</td>
-        <td style="width:45%;">${text/inventory_license_list_product | NULL}</td>
-        <td style="width:25%;">${text/inventory_license_list_key | NULL}</td>
-        <td style="width:15%;">${text/inventory_hardware_assignment | NULL}</td>
-        <td style="width:10%">
-          <span style="float:right">
-            <a type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-plus" aria-hidden="true" tal:condition="php:_SESSION['admin'] == True' | NULL" title="${text/structure_new_license | NULL}" href="${getPath}/inventory/license/new" />
-          </span>
-        </td>
-      </tr>
+  <table>
+    <tr style="background-color:#e3e3e3; font-weight: bold;">
+      <td style="width:5%;">${text/inventory_license_list_number | NULL}</td>
+      <td style="width:45%;">${text/inventory_license_list_product | NULL}</td>
+      <td style="width:25%;">${text/inventory_license_list_key | NULL}</td>
+      <td style="width:15%;">${text/inventory_hardware_assignment | NULL}</td>
+      <td style="width:10%">
+        <span style="float:right">
+          <a type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-plus" aria-hidden="true" tal:condition="php:_SESSION['admin'] == True' | NULL" title="${text/structure_new_license | NULL}" href="${getPath}/inventory/license/new" />
+        </span>
+      </td>
+    </tr>
 
-      <tr tal:repeat="list liste">
-        <td>${list/anzahl}</td>
-        <td>${list/hersteller} ${list/produkt} ${list/version}</td>
-        <td>${list/licensekey}</td>
-        <td>${list/zuordnung}</td>
-        <td>
-          <span style="float:right" tal:condition="php:_SESSION['admin'] == True' | NULL">
-            <a type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-edit" aria-hidden="true" title="${text/vmware_detail_edit | NULL}" href="${getPath}/inventory/license/edit/${list/id}" />
-            <a type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-remove" aria-hidden="true" title="${text/structur_system_del | NULL}" href="${getPath}/inventory/license/delete/${list/id}" onclick="return confirm('${text/inventory_hardware_delete | NULL}');" />
-          </span>
-        </td>
-      </tr>
-    </table>
-  </div> 
+    <tr tal:repeat="list liste">
+      <td>${list/anzahl}</td>
+      <td>${list/hersteller} ${list/produkt} ${list/version}</td>
+      <td>${list/licensekey}</td>
+      <td>${list/zuordnung}</td>
+      <td>
+        <span style="float:right" tal:condition="php:_SESSION['admin'] == True' | NULL">
+          <a type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-edit" aria-hidden="true" title="${text/vmware_detail_edit | NULL}" href="${getPath}/inventory/license/edit/${list/id}" />
+          <a type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-remove" aria-hidden="true" title="${text/structur_system_del | NULL}" href="${getPath}/inventory/license/delete/${list/id}" onclick="return confirm('${text/inventory_hardware_delete | NULL}');" />
+        </span>
+      </td>
+    </tr>
+  </table>
   
   <tal:block tal:condition="Blaetter | NULL" metal:use-macro="structure/blaetter.xhtml/standard" />
   

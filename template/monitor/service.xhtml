@@ -1,172 +1,170 @@
 <tal:block metal:define-macro="standard">
     
-  <div class="list-group margin-b-3">
-    <form name="config" method="post" action="${getPath}/monitor/service/save">      
-      <input tal:condition="server_detail | NULL" type="hidden" name="home_system" value="${server_detail/id | NULL}" />
-      <input tal:condition="service_detail | NULL" type="hidden" name="server_id" value="${service_detail/server_id | NULL}" />
-      <input tal:condition="service_detail | NULL" type="hidden" name="return" value="${service_detail/home_system | NULL}" />
-      <input tal:condition="referr | NULL" type="hidden" name="referr" value="${referr | NULL}" />
-      
-      <table>
-        <tr style="background-color:#e3e3e3; font-weight: bold;">
-          <td colspan="2" style="width:850px;">
-            ${text/monitor_service_new_service | NULL}
-            <span tal:condition="service_detail/home_system | NULL" style="float:right">
-              <a title="${text/monitor_service_server_details | NULL}" href="/server/detail/${service_detail/home_system | NULL}">
-              <img src="${getPath}/assets/icons/server.png" />
-              </a>
-            </span>
-            <span tal:condition="server_detail/id | NULL" style="float:right">
-              <a title="S${text/monitor_service_server_details | NULL}" href="/server/detail/${server_detail/id | NULL}">
-              <img src="${getPath}/assets/icons/server.png" />
-              </a>
-            </span>
-          </td>
-        </tr>
-        
-        <tr>
-          <td style="width:200px;">${text/monitor_service_designation | NULL}</td>
-          <td style="width:650px;">
-            <input tal:condition="server_detail | NULL" type="text" name="label" id="contactEmail" class="form-control" value="${server_detail/bezeichnung | NULL}" />
-            <input tal:condition="service_detail | NULL" type="text" name="label" id="contactEmail" class="form-control" value="${service_detail/label | NULL}" />
-          </td>
-        </tr>
-        
-        <tr>
-          <td style="width:200px;">${text/monitor_service_monitoring | NULL}</td>
-          <td style="width:650px;">
-            <select class="form-control" name="type" size="1">
-              <option value="service" tal:attributes="selected php:_SESSION['service_detail']['type'] == 'service'">${text/monitor_service_service | NULL}</option>
-              <option value="website" tal:attributes="selected php:_SESSION['service_detail']['type'] == 'website'">${text/monitor_service_website | NULL}</option>
-              <option value="reminder" tal:attributes="selected php:_SESSION['service_detail']['type'] == 'reminder'">${text/monitor_service_expires | NULL}</option>
-            </select>
-          </td>
-        </tr>
-        
-        <tr>
-          <td colspan="2">
-            <table style="width:100%;" id="reminder">
-              <tr>
-                <td style="width:200px;">${text/monitor_service_expires | NULL}</td>
-                <td style="width:100px;">${text/monitor_service_date | NULL}</td>
-                <td style="width:175px;"><input type="text" name="end_date" class="tcal form-control" value="${service_detail/end_date | NULL}" /></td>
-                <td style="width:130px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${text/monitor_service_date_warning | NULL}</td>
-                <td style="width:175px;"><input type="text" name="warn_date" class="tcal form-control" value="${service_detail/warn_date | NULL}" /></td>
-              </tr>        
-            </table>
-          </td>
-        </tr>
-        
-        <tr>
-          <td style="width:200px;">${text/monitor_service_ip | NULL}</td>
-          <td style="width:650px;">
-            <input tal:condition="server_detail | NULL" type="text" name="ip" value="${server_detail/ipadressen | NULL}" class="form-control" />
-            <input tal:condition="service_detail | NULL" type="text" name="ip" value="${service_detail/ip | NULL}" class="form-control" />
-          </td>
-        </tr>
-        
-        <tr>
-          <td style="width:200px;">${text/monitor_service_port | NULL}</td>
-          <td style="width:650px;">
-            <input tal:condition="server_detail | NULL" type="text" name="port" class="form-control" placeholder="${text/inventory_service_portnumber | NULL}" />
-            <input tal:condition="service_detail | NULL" type="text" name="port" value="${service_detail/port | NULL}" class="form-control" />
-          </td>
-        </tr>
-        
-        <tr>
-          <td style="width:200px;">${text/monitor_service_searchpattern | NULL}</td>
-          <td style="width:650px;">
-            <input tal:condition="server_detail | NULL" type="text" name="pattern" class="form-control" placeholder="${text/inventory_service_show_off | NULL}" />
-            <input tal:condition="service_detail | NULL" type="text" name="pattern" value="${service_detail/pattern | NULL}" class="form-control" />
-          </td>
-        </tr>
-        
-        <tr style="background-color:#e3e3e3; font-weight: bold;">
-          <td colspan="2">${text/monitor_service_mo_and_no | NULL}</td>
-        </tr>
-        
-        <tr>
-          <td style="width:200px;">${text/monitor_service_monitoring | NULL}</td>
-          <td style="width:650px;">
-            <select class="form-control" name="active" size="1">
-              <option value="yes" tal:attributes="selected php:_SESSION['service_detail']['active'] == 'yes'">${text/monitor_service_monitoring_on | NULL}</option>
-              <option value="no" tal:attributes="selected php:_SESSION['service_detail']['active'] == 'no'">${text/monitor_service_without_monitoring | NULL}</option>
-            </select>
-          </td>
-        </tr>
-        
-        <tr>
-          <td style="width:200px;">${text/monitor_service_user_notification | NULL}</td>
-          <td style="width:650px;">
-            <select class="form-control" name="user" size="5" multiple="multiple">
-              <option tal:condition="not:service_detail | NULL" tal:repeat="user user_liste" value="${user/username | NULL}">${user/lastname}, ${user/firstname}</option>
-              <option tal:condition="service_detail | NULL" tal:repeat="user user_liste" tal:attributes="selected php:in_array(user['username'], explode(',', service_detail['user'])) | NULL" value="${user/username | NULL}">${user/lastname}, ${user/firstname}</option>
-            </select>
-            
-          </td>
-        </tr>
-        
-        <tr>
-          <td style="width:200px;">${text/monitor_service_push_notification | NULL}</td>
-          <td style="width:650px;">
-            <select class="form-control" name="pushover" size="1">
-              <option value="yes" tal:attributes="selected php:_SESSION['service_detail']['pushover'] == 'yes'">${text/monitor_service_push_on | NULL}</option>
-              <option value="no" tal:attributes="selected php:_SESSION['service_detail']['pushover'] == 'no'">${text/monitor_service_push_off | NULL}</option>
-            </select>
-          </td>
-        </tr>
-        
-        <tr>
-          <td style="width:200px;">${text/monitor_service_push_mail | NULL}</td>
-          <td style="width:650px;">
-            <select class="form-control" name="email" size="1">
-              <option value="yes" tal:attributes="selected php:_SESSION['service_detail']['email'] == 'yes'">${text/monitor_service_push_mail_on}</option>
-              <option value="no" tal:attributes="selected php:_SESSION['service_detail']['email'] == 'no'">${text/monitor_service_push_mail_off | NULL}</option>
-            </select>
-          </td>
-        </tr>
-        
-        <tr style="background-color:#e3e3e3; font-weight: bold;">
-          <td colspan="2">${text/monitor_service_system_description | NULL}</td>
-        </tr>
+  <form name="config" method="post" action="${getPath}/monitor/service/save">      
+    <input tal:condition="server_detail | NULL" type="hidden" name="home_system" value="${server_detail/id | NULL}" />
+    <input tal:condition="service_detail | NULL" type="hidden" name="server_id" value="${service_detail/server_id | NULL}" />
+    <input tal:condition="service_detail | NULL" type="hidden" name="return" value="${service_detail/home_system | NULL}" />
+    <input tal:condition="referr | NULL" type="hidden" name="referr" value="${referr | NULL}" />
 
-        <tr>
-          <td colspan="2" style="width:850px;"><textarea name="description" class="form-control" id="contactComment" style="height:100px;">${service_detail/description | NULL}</textarea></td>
-        </tr>
-        
-      </table><br />
-      
-      <button type="submit" class="btn btn-success" style="float:left;">${text/monitor_service_service_save | NULL}</button>
-      <a href="javascript:history.back();" class="btn btn-danger show-modal" style="float:right;">${text/system_cancel | NULL}</a>
-    </form>
-    
-    
+    <table>
+      <tr style="background-color:#e3e3e3; font-weight: bold;">
+        <td colspan="2" style="width:850px;">
+          ${text/monitor_service_new_service | NULL}
+          <span tal:condition="service_detail/home_system | NULL" style="float:right">
+            <a title="${text/monitor_service_server_details | NULL}" href="/server/detail/${service_detail/home_system | NULL}">
+            <img src="${getPath}/assets/icons/server.png" />
+            </a>
+          </span>
+          <span tal:condition="server_detail/id | NULL" style="float:right">
+            <a title="S${text/monitor_service_server_details | NULL}" href="/server/detail/${server_detail/id | NULL}">
+            <img src="${getPath}/assets/icons/server.png" />
+            </a>
+          </span>
+        </td>
+      </tr>
 
-    
-    <form name="config" method="post" action="${getPath}/monitor/service/relation" tal:condition="all_services | NULL">      
-      <input tal:condition="server_detail | NULL" type="hidden" name="home_system" value="${server_detail/id | NULL}" />
-      <input tal:condition="service_detail | NULL" type="hidden" name="server_id" value="${service_detail/server_id | NULL}" />
-      <input tal:condition="service_detail | NULL" type="hidden" name="return" value="${service_detail/home_system | NULL}" />
-      <br /><br /><br />
-      <table>
-        <tr style="background-color:#e3e3e3; font-weight: bold;">
-          <td>${text/monitor_service_dependence_selection | NULL}</td>
-        </tr>
-        
-        <tr>
-          <td style="width:800px;">
-            <select class="form-control" name="service_relations[]" size="25" multiple="multiple" >
-              <option tal:repeat="service all_services" value="${service/server_id}">${service/label}</option>
-            </select>
-          </td>
-        </tr>
-        
-      </table><br />
-      
-      <button type="submit" class="btn btn-success" style="float:left;">${text/monitor_service_save_dependence | NULL}</button>
-      <a href="javascript:history.back();" class="btn btn-danger show-modal" style="float:right;">${text/system_cancel}</a>
-    </form>
-    <a name="relation" />
-  </div>
+      <tr>
+        <td style="width:200px;">${text/monitor_service_designation | NULL}</td>
+        <td style="width:650px;">
+          <input tal:condition="server_detail | NULL" type="text" name="label" id="contactEmail" class="form-control" value="${server_detail/bezeichnung | NULL}" />
+          <input tal:condition="service_detail | NULL" type="text" name="label" id="contactEmail" class="form-control" value="${service_detail/label | NULL}" />
+        </td>
+      </tr>
+
+      <tr>
+        <td style="width:200px;">${text/monitor_service_monitoring | NULL}</td>
+        <td style="width:650px;">
+          <select class="form-control" name="type" size="1">
+            <option value="service" tal:attributes="selected php:_SESSION['service_detail']['type'] == 'service'">${text/monitor_service_service | NULL}</option>
+            <option value="website" tal:attributes="selected php:_SESSION['service_detail']['type'] == 'website'">${text/monitor_service_website | NULL}</option>
+            <option value="reminder" tal:attributes="selected php:_SESSION['service_detail']['type'] == 'reminder'">${text/monitor_service_expires | NULL}</option>
+          </select>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2">
+          <table style="width:100%;" id="reminder">
+            <tr>
+              <td style="width:200px;">${text/monitor_service_expires | NULL}</td>
+              <td style="width:100px;">${text/monitor_service_date | NULL}</td>
+              <td style="width:175px;"><input type="text" name="end_date" class="tcal form-control" value="${service_detail/end_date | NULL}" /></td>
+              <td style="width:130px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${text/monitor_service_date_warning | NULL}</td>
+              <td style="width:175px;"><input type="text" name="warn_date" class="tcal form-control" value="${service_detail/warn_date | NULL}" /></td>
+            </tr>        
+          </table>
+        </td>
+      </tr>
+
+      <tr>
+        <td style="width:200px;">${text/monitor_service_ip | NULL}</td>
+        <td style="width:650px;">
+          <input tal:condition="server_detail | NULL" type="text" name="ip" value="${server_detail/ipadressen | NULL}" class="form-control" />
+          <input tal:condition="service_detail | NULL" type="text" name="ip" value="${service_detail/ip | NULL}" class="form-control" />
+        </td>
+      </tr>
+
+      <tr>
+        <td style="width:200px;">${text/monitor_service_port | NULL}</td>
+        <td style="width:650px;">
+          <input tal:condition="server_detail | NULL" type="text" name="port" class="form-control" placeholder="${text/inventory_service_portnumber | NULL}" />
+          <input tal:condition="service_detail | NULL" type="text" name="port" value="${service_detail/port | NULL}" class="form-control" />
+        </td>
+      </tr>
+
+      <tr>
+        <td style="width:200px;">${text/monitor_service_searchpattern | NULL}</td>
+        <td style="width:650px;">
+          <input tal:condition="server_detail | NULL" type="text" name="pattern" class="form-control" placeholder="${text/inventory_service_show_off | NULL}" />
+          <input tal:condition="service_detail | NULL" type="text" name="pattern" value="${service_detail/pattern | NULL}" class="form-control" />
+        </td>
+      </tr>
+
+      <tr style="background-color:#e3e3e3; font-weight: bold;">
+        <td colspan="2">${text/monitor_service_mo_and_no | NULL}</td>
+      </tr>
+
+      <tr>
+        <td style="width:200px;">${text/monitor_service_monitoring | NULL}</td>
+        <td style="width:650px;">
+          <select class="form-control" name="active" size="1">
+            <option value="yes" tal:attributes="selected php:_SESSION['service_detail']['active'] == 'yes'">${text/monitor_service_monitoring_on | NULL}</option>
+            <option value="no" tal:attributes="selected php:_SESSION['service_detail']['active'] == 'no'">${text/monitor_service_without_monitoring | NULL}</option>
+          </select>
+        </td>
+      </tr>
+
+      <tr>
+        <td style="width:200px;">${text/monitor_service_user_notification | NULL}</td>
+        <td style="width:650px;">
+          <select class="form-control" name="user" size="5" multiple="multiple">
+            <option tal:condition="not:service_detail | NULL" tal:repeat="user user_liste" value="${user/username | NULL}">${user/lastname}, ${user/firstname}</option>
+            <option tal:condition="service_detail | NULL" tal:repeat="user user_liste" tal:attributes="selected php:in_array(user['username'], explode(',', service_detail['user'])) | NULL" value="${user/username | NULL}">${user/lastname}, ${user/firstname}</option>
+          </select>
+
+        </td>
+      </tr>
+
+      <tr>
+        <td style="width:200px;">${text/monitor_service_push_notification | NULL}</td>
+        <td style="width:650px;">
+          <select class="form-control" name="pushover" size="1">
+            <option value="yes" tal:attributes="selected php:_SESSION['service_detail']['pushover'] == 'yes'">${text/monitor_service_push_on | NULL}</option>
+            <option value="no" tal:attributes="selected php:_SESSION['service_detail']['pushover'] == 'no'">${text/monitor_service_push_off | NULL}</option>
+          </select>
+        </td>
+      </tr>
+
+      <tr>
+        <td style="width:200px;">${text/monitor_service_push_mail | NULL}</td>
+        <td style="width:650px;">
+          <select class="form-control" name="email" size="1">
+            <option value="yes" tal:attributes="selected php:_SESSION['service_detail']['email'] == 'yes'">${text/monitor_service_push_mail_on}</option>
+            <option value="no" tal:attributes="selected php:_SESSION['service_detail']['email'] == 'no'">${text/monitor_service_push_mail_off | NULL}</option>
+          </select>
+        </td>
+      </tr>
+
+      <tr style="background-color:#e3e3e3; font-weight: bold;">
+        <td colspan="2">${text/monitor_service_system_description | NULL}</td>
+      </tr>
+
+      <tr>
+        <td colspan="2" style="width:850px;"><textarea name="description" class="form-control" id="contactComment" style="height:100px;">${service_detail/description | NULL}</textarea></td>
+      </tr>
+
+    </table><br />
+
+    <button type="submit" class="btn btn-success" style="float:left;">${text/monitor_service_service_save | NULL}</button>
+    <a href="javascript:history.back();" class="btn btn-danger show-modal" style="float:right;">${text/system_cancel | NULL}</a>
+  </form>
+
+
+
+
+  <form name="config" method="post" action="${getPath}/monitor/service/relation" tal:condition="all_services | NULL">      
+    <input tal:condition="server_detail | NULL" type="hidden" name="home_system" value="${server_detail/id | NULL}" />
+    <input tal:condition="service_detail | NULL" type="hidden" name="server_id" value="${service_detail/server_id | NULL}" />
+    <input tal:condition="service_detail | NULL" type="hidden" name="return" value="${service_detail/home_system | NULL}" />
+    <br /><br /><br />
+    <table>
+      <tr style="background-color:#e3e3e3; font-weight: bold;">
+        <td>${text/monitor_service_dependence_selection | NULL}</td>
+      </tr>
+
+      <tr>
+        <td style="width:800px;">
+          <select class="form-control" name="service_relations[]" size="25" multiple="multiple" >
+            <option tal:repeat="service all_services" value="${service/server_id}">${service/label}</option>
+          </select>
+        </td>
+      </tr>
+
+    </table><br />
+
+    <button type="submit" class="btn btn-success" style="float:left;">${text/monitor_service_save_dependence | NULL}</button>
+    <a href="javascript:history.back();" class="btn btn-danger show-modal" style="float:right;">${text/system_cancel}</a>
+  </form>
+  <a name="relation" />
   
 </tal:block>
