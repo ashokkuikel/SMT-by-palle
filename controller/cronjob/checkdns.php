@@ -17,7 +17,7 @@ for ($i = 0; $i < count($res); $i++) {
 }
 
 if (isset($url['2'])) {
-  header("Location: " . $_SERVER['HTTP_REFERER']);
+  header("Location: " . filter_input(INPUT_SERVER, 'HTTP_REFERER'));
 }
 
 die();

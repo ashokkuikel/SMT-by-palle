@@ -1,6 +1,7 @@
 <?php
 
   Template::setText('mypage_active', 'active');
+  
   $wos    = new Server();
   $server = $user_daten['favorite'];
 
@@ -14,4 +15,4 @@
   template::setText('page_reload', base::get('Handler')->config['auto_refresh_servers']);
   template::setText('psm_last_update', Base::get('Handler')->getLastUpdate());
 
-  // $v = $user->getUserDaten('db_user_contact', $user->getUsername());
+?>
