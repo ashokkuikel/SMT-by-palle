@@ -4,13 +4,14 @@ $url = base::get('url');
 $wos = new Service();
 $upd = new Updater();
 $las = Base::get('Handler')->getLastUpdate();
+$arg = filter_input(INPUT_SERVER, 'argv');
 
 // Alles Service die geprüft werden sollen einlesen
 $result = $wos->getAllUpdateService($las['counter']);
 //die(print_r($result));
 
-if (!empty($_SERVER['argv'])) {
-  foreach ($_SERVER['argv'] as $argv) {
+if (!empty($argv)) {
+  foreach ($arg as $argv) {
     $argi = explode('=', ltrim($argv, '--'));
     if (count($argi) !== 2) {
       continue;
@@ -40,5 +41,5 @@ if (!isset($url['2'])) {
 }
 
 if (isset($url['2'])) {
-  header("Location: " . $_SERVER['HTTP_REFERER']);
+  header("Location: " . filter_input(INPUT_SERVER, 'HTTP_REFERER'));
 } 
