@@ -45,16 +45,22 @@
     <tr style="background-color:#e3e3e3; font-weight: bold;">
       <td style="width:15%;">${text/structure_system_type | NULL}</td>
       <td>${text/structure_system_message | NULL}</td>
-      <td style="width:10%;">
-        ${text/structure_system_date_time | NULL} 
-        <a type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-remove" aria-hidden="true" href="${getPath}${getURL}/empty" title="${text/empty_logfiles | NULL}" onclick="return confirm('${text/empty_logfiles | NULL}');" />
+      <td style="width:15%;">
+        <span style="float:right;">
+          ${text/structure_system_date_time | NULL} 
+          <a type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-remove" aria-hidden="true" href="${getPath}${getURL}/empty" title="${text/empty_logfiles | NULL}" onclick="return confirm('${text/empty_logfiles | NULL}');" />
+        </span>
       </td>
     </tr>
 
     <tr tal:repeat="detail detail/log">
       <td>${detail/type}</td>
       <td>${structure detail/message}</td>
-      <td>${detail/datetime}</td>
+      <td>
+        <span style="float:right;">
+          ${detail/datetime}
+        </span>
+      </td>
     </tr>
   </table>
 </tal:block>
