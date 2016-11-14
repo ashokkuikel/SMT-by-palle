@@ -70,17 +70,17 @@
           </tr>
         </table><br />
       
-      <button type="submit" class="btn btn-success" style="width:200px;float:left;">${text/user_admin_save_data | NULL}</button>
-      <a href="javascript:history.back();" class="btn btn-danger show-modal" style="width:200px;float:right;">Abbrechen</a>
+      <button type="submit" class="btn btn-success" style="float:left;">${text/user_admin_save_data | NULL}</button>
+      <a href="javascript:history.back();" class="btn btn-danger show-modal" style="float:right;">Abbrechen</a>
       </form>
     </div>
 		
     <div class="col-sm-4 col-sm-pull-8">
-      <tal:block metal:use-macro="structure/submenu.xhtml/user"></tal:block>
+      <tal:block metal:use-macro="structure/submenu.xhtml/user" />
         <span tal:condition="admin | NULL">
-      <tal:block metal:use-macro="structure/submenu.xhtml/admin"></tal:block>
+      <tal:block metal:use-macro="structure/submenu.xhtml/admin" />
       </span>
-      <tal:block metal:use-macro="structure/panel.xhtml/standard"></tal:block>
+      <tal:block metal:use-macro="structure/panel.xhtml/standard" />
     </div>
 	</div>
 

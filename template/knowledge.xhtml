@@ -2,10 +2,10 @@
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
-  <tal:block metal:use-macro="structure/metatags.xhtml/standard"></tal:block>
+  <tal:block metal:use-macro="structure/metatags.xhtml/standard" />
 
   <body>
-	  <tal:block metal:use-macro="structure/navbar.xhtml/standard"></tal:block>
+	  <tal:block metal:use-macro="structure/navbar.xhtml/standard" />
 		<div class="content">
 
 			<div class="row">
@@ -26,32 +26,32 @@
 				</div>
         
         <div class="col-sm-8 col-sm-push-4" tal:condition="edit | NULL">
-          <tal:block metal:use-macro="structure/metatags.xhtml/editor"></tal:block>
+          <tal:block metal:use-macro="structure/metatags.xhtml/editor" />
           <form name="edit" method="post" action="${getPath}/knowledge/save/${content_knowledge/id}" enctype="multipart/form-data">
             <input type="hidden" name="version" value="${content_knowledge/version}" />
             <input type="text" name="page_name" class="form-control" value="${content_knowledge/page_name | NULL}"  placeholder="${text/template_inventory_site_menu | NULL}" /><br />
             <textarea name="page_content" class="form-control" id="contactComment" style="height:650px;font-size:0.9em;">${content_knowledge/page_content | NULL}</textarea><br />
             <input type="text" name="keywords" class="form-control" value="${content_knowledge/keywords | NULL}" placeholder="${text/template_inventory_search_help | NULL}" /><br />
-            <button type="submit" class="btn btn-success" style="width:200px;float:left;">${text/template_inventory_save_contributio | NULL}</button>
-            <a href="javascript:history.back();" class="btn btn-danger show-modal" style="width:200px;float:right;">${text/system_cancel | NULL}</a>
+            <button type="submit" class="btn btn-success" style="float:left;">${text/template_inventory_save_contributio | NULL}</button>
+            <a href="javascript:history.back();" class="btn btn-danger show-modal" style="float:right;">${text/system_cancel | NULL}</a>
           </form>
 				</div>
         
         <div class="col-sm-8 col-sm-push-4" tal:condition="new | NULL">
-          <tal:block metal:use-macro="structure/metatags.xhtml/editor"></tal:block>
+          <tal:block metal:use-macro="structure/metatags.xhtml/editor" />
           <form name="new" method="post" action="${getPath}/knowledge/save" multipart="" enctype="multipart/form-data">
             <input type="text" name="page_name" class="form-control" placeholder="${text/template_inventory_site_menu | NULL}" /><br />
             <textarea name="page_content" class="form-control" id="contactComment" style="height:650px;font-size:0.9em;"></textarea><br />
             <input type="text" name="keywords" class="form-control" placeholder="${text/template_inventory_search_help | NULL}" /><br />
-            <button type="submit" class="btn btn-success" style="width:200px;float:left;">${text/template_inventory_save_contributio | NULL}</button>
-            <a href="javascript:history.back();" class="btn btn-danger show-modal" style="width:200px;float:right;">${text/system_cancel | NULL}</a>
+            <button type="submit" class="btn btn-success" style="float:left;">${text/template_inventory_save_contributio | NULL}</button>
+            <a href="javascript:history.back();" class="btn btn-danger show-modal" style="float:right;">${text/system_cancel | NULL}</a>
           </form>
 				</div>
         
 				<div class="col-sm-4 col-sm-pull-8">
-          <tal:block metal:use-macro="structure/search.xhtml/standard"></tal:block>
-          <tal:block metal:use-macro="structure/submenu.xhtml/knowledge"></tal:block>
-          <tal:block metal:use-macro="structure/panel.xhtml/standard"></tal:block>
+          <tal:block metal:use-macro="structure/search.xhtml/standard" />
+          <tal:block metal:use-macro="structure/submenu.xhtml/knowledge" />
+          <tal:block metal:use-macro="structure/panel.xhtml/standard" />
         </div>
 			</div>
 		</div>

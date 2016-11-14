@@ -8,7 +8,7 @@
 		<div class="form-group">
 			<textarea name="nachricht" class="form-control" id="contactComment" style="height:100px;"></textarea>
 		</div>
-    <select class="form-control" style="width:200px;float:left;" name="controller">
+    <select class="form-control" style="float:left;" name="controller">
       <option value="">Alle Seiten</option>
       <option value="">-----------------------------------</option>
       <option value="home">Startseite</option>
@@ -18,7 +18,7 @@
       <option value="monitor">Monitoring</option>
     </select>
     &nbsp;&nbsp;&nbsp;
-    <button type="submit" class="btn btn-success" style="width:200px;float:right;">Neue Nachricht speichern</button>
+    <button type="submit" class="btn btn-success" style="float:right;">Neue Nachricht speichern</button>
 	</form>
   
   <hr />
@@ -39,8 +39,8 @@
           <div class="form-group">
             <textarea name="nachricht" class="form-control" id="contactComment" style="height:100px;">${form/nachricht}</textarea>
           </div>
-          <button type="submit" class="btn btn-success" style="width:200px;float:left;">Änderung speichern</button> &nbsp; 
-          <a href="${getPath}${getURL}/delete/${form/id | NULL}" class="btn btn-danger show-modal" onclick="return confirm('Soll dieser Eintrag wirklich gelöscht werden ???\nDer Inhalt ist dann unwiderruflich weg!!!');" style="width:200px;float:right;">Nachricht löschen</a>
+          <button type="submit" class="btn btn-success" style="float:left;">Änderung speichern</button> &nbsp; 
+          <a href="${getPath}${getURL}/delete/${form/id | NULL}" class="btn btn-danger show-modal" onclick="return confirm('Soll dieser Eintrag wirklich gelöscht werden ???\nDer Inhalt ist dann unwiderruflich weg!!!');" style="float:right;">Nachricht löschen</a>
         </form>
       </div>
 		</div>

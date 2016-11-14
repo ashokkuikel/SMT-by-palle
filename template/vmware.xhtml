@@ -2,20 +2,20 @@
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
-  <tal:block metal:use-macro="structure/metatags.xhtml/standard"></tal:block>
+  <tal:block metal:use-macro="structure/metatags.xhtml/standard" />
 
   <body>
-	  <tal:block metal:use-macro="structure/navbar.xhtml/standard"></tal:block>
+	  <tal:block metal:use-macro="structure/navbar.xhtml/standard" />
 		<div class="content">
 
 			<div class="row">
 				<div class="col-sm-8 col-sm-push-4">
-          <tal:block metal:use-macro="${controller}/${methode}.xhtml/standard"></tal:block>
+          <tal:block metal:use-macro="${controller}/${methode}.xhtml/standard" />
 				</div>
 				<div class="col-sm-4 col-sm-pull-8">
-					<tal:block metal:use-macro="structure/submenu.xhtml/standard"></tal:block>
-          <tal:block metal:use-macro="structure/search.xhtml/standard"></tal:block>
-          <tal:block metal:use-macro="structure/panel.xhtml/standard"></tal:block>
+					<tal:block metal:use-macro="structure/submenu.xhtml/standard" />
+          <tal:block metal:use-macro="structure/search.xhtml/standard" />
+          <tal:block metal:use-macro="structure/panel.xhtml/standard" />
         </div>
 			</div>
 		</div>

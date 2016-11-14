@@ -2,7 +2,7 @@
   <div class="list-group margin-b-3">
       <table>
         <tr style="background-color:#e3e3e3; font-weight: bold;">
-          <td colspan="3" style="width:850px;">
+          <td colspan="3">
             ${detail/label}
             <span style="float:right">
               <a type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-edit" aria-hidden="true" tal:condition="php:_SESSION['admin'] == True' | NULL" href="${getPath}/monitor/service/edit/${detail/server_id}" />
@@ -12,27 +12,27 @@
         </tr>
         
         <tr>
-          <td style="width:283px;">${text/inventory_hardware_designation | NULL}: ${detail/label}</td>
-          <td style="width:283px;">${detail/ip}</td>
-          <td style="width:283px;">${text/monitor_service_port | NULL}: ${detail/port}</td>
+          <td style="width:33%;">${text/inventory_hardware_designation | NULL}: ${detail/label}</td>
+          <td style="width:33%;">${detail/ip}</td>
+          <td style="width:33%;">${text/monitor_service_port | NULL}: ${detail/port}</td>
         </tr>
         
         <tr>
-          <td style="width:283px;">${text/structure_system_type | NULL}: ${detail/type}</td>
-          <td style="width:283px;">${text/monitor_service_searchpattern | NULL}: ${detail/pattern}</td>
-          <td style="width:283px;">${text/structure_system_status | NULL}: ${detail/status}</td>
+          <td>${text/structure_system_type | NULL}: ${detail/type}</td>
+          <td>${text/monitor_service_searchpattern | NULL}: ${detail/pattern}</td>
+          <td>${text/structure_system_status | NULL}: ${detail/status}</td>
         </tr>
         
         <tr>
-          <td style="width:283px;">${text/monitor_overview_last_online | NULL}: ${detail/last_online}</td>
-          <td style="width:283px;">${text/monitior_overview_last_check | NULL}: ${detail/last_check}</td>
-          <td style="width:283px;">${text/monitor_overview_rtime | NULL}: ${detail/rtime}</td>
+          <td>${text/monitor_overview_last_online | NULL}: ${detail/last_online}</td>
+          <td>${text/monitior_overview_last_check | NULL}: ${detail/last_check}</td>
+          <td>${text/monitor_overview_rtime | NULL}: ${detail/rtime}</td>
         </tr>
         
         <tr>
-          <td style="width:283px;">${text/structure_system_monitor | NULL}: ${detail/active}</td>
-          <td style="width:283px;">${text/structure_system_pushover | NULL}: ${detail/pushover}</td>
-          <td style="width:283px;">${text/structure_system_email | NULL}: ${detail/email}</td>
+          <td>${text/structure_system_monitor | NULL}: ${detail/active}</td>
+          <td>${text/structure_system_pushover | NULL}: ${detail/pushover}</td>
+          <td>${text/structure_system_email | NULL}: ${detail/email}</td>
         </tr>
         <tr>
           <td colspan="3">${text/inventory_hardware_description | NULL}: ${detail/description}</td>
@@ -46,18 +46,18 @@
   <div class="list-group margin-b-3">
       <table>
         <tr style="background-color:#e3e3e3; font-weight: bold;">
-          <td style="width:80px;">${text/structure_system_type | NULL}</td>
-          <td style="width:600px;">${text/structure_system_message | NULL}</td>
-          <td style="width:100px;">
+          <td style="width:15%;">${text/structure_system_type | NULL}</td>
+          <td>${text/structure_system_message | NULL}</td>
+          <td style="width:10%;">
             ${text/structure_system_date_time | NULL} 
             <a type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-remove" aria-hidden="true" href="${getPath}${getURL}/empty" title="${text/empty_logfiles | NULL}" onclick="return confirm('${text/empty_logfiles | NULL}');" />
           </td>
         </tr>
         
         <tr tal:repeat="detail detail/log">
-          <td style="width:80px;">${detail/type}</td>
-          <td style="width:600px;">${structure detail/message}</td>
-          <td style="width:100px;">${detail/datetime}</td>
+          <td>${detail/type}</td>
+          <td>${structure detail/message}</td>
+          <td>${detail/datetime}</td>
         </tr>
       </table>
   </div>
@@ -66,16 +66,16 @@
 
 
 <tal:block metal:define-macro="service_log_detail">
-  <div class="list-group margin-b-3" style="overflow: auto;max-height:400px;">
-      <table style="width:99%;">
+  <div class="list-group margin-b-3">
+      <table >
         <tr style="background-color:#e3e3e3; font-weight: bold;">
-          <td style="width:200px;">${text/structure_system_date_time | NULL}</td>
-          <td style="width:575px;">${text/structure_system_message | NULL}</td>
+          <td style="width:20%;">${text/structure_system_date_time | NULL}</td>
+          <td style="width:80%;">${text/structure_system_message | NULL}</td>
         </tr>
         
         <tr tal:repeat="detail detail/log">
-          <td style="width:200px;">${detail/datetime}</td>
-          <td style="width:575px;">${structure detail/message}</td>
+          <td>${detail/datetime}</td>
+          <td>${structure detail/message}</td>
         </tr>
       </table>
   </div>
