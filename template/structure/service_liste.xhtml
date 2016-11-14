@@ -14,9 +14,9 @@
       <td style="width:25px;">
         <img tal:condition="php:liste['active'] == 'yes' | NULL" border="0" style="width:20px;height:20px;" src="${getPath}/assets/images/${liste/status}.png" />
       </td>
-      <td style="width:40%;"><a href="${getPath}/monitor/detail/${liste/server_id}">${liste/label}</a></td>
-      <td style="width:10%;">${liste/type}</td>
-      <td style="width:10%;">${liste/port}</td>
+      <td style="width:30%;"><a href="${getPath}/monitor/detail/${liste/server_id}">${liste/label}</a></td>
+      <td style="width:15%;">${liste/type}</td>
+      <td style="width:15%;">${liste/port}</td>
       <td style="width:15%;">${liste/last_online}</td>
       <td style="width:15%;">
         <span aria-label="Left Align" class="glyphicon glyphicon-eye-open" aria-hidden="true" title="${text/structure_activ_monitoring | NULL}" tal:condition="php:liste['active'] == 'yes' | NULL" />
