@@ -37,7 +37,7 @@
     <tr style="background-color:#e3e3e3; font-weight: bold;">
       <td colspan="7" style="width:850px;">${text/structure_list_depende_system | NULL}
         <span style="float:right">
-          <a tal:condition="php:_SESSION['admin'] == True' | NULL" title="${text/structure_form_new_dep | NULL}" href="${getPath}/monitor/service/new/${server_detail/id}#relation"><img border="0" src="${getPath}/assets/icons/add.png"/></a>
+          <a type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-plus" aria-hidden="true" tal:condition="php:_SESSION['admin'] == True' | NULL" title="${text/structure_form_new_dep | NULL}" href="${getPath}/monitor/service/new/${server_detail/id}#relation" />
         </span>
     </td>
     </tr>
@@ -56,7 +56,7 @@
         <span aria-label="Left Align" class="glyphicon glyphicon-phone" aria-hidden="true" title="${text/structure_push_message_on | NULL}" tal:condition="php:liste['pushover'] == 'yes' | NULL" />
       </td>
       <td style="width:10%; text-align:right;">
-        <a tal:condition="php:_SESSION['admin'] == True' | NULL" title="${text/structure_depende_del | NULL}" href="${getPath}/monitor/service/delete_relation/${server_detail/id}/${liste/server_id}" onclick="return confirm('${text/structure_list_delet | NULL}');"><img src="${getPath}/assets/icons/del.png" /></a>
+        <a type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-remove" aria-hidden="true" tal:condition="php:_SESSION['admin'] == True' | NULL" title="${text/structure_depende_del | NULL}" href="${getPath}/monitor/service/delete_relation/${server_detail/id}/${liste/server_id}" onclick="return confirm('${text/structure_list_delet | NULL}');" />
       </td>
     </tr>
   </table>

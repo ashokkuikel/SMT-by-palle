@@ -15,7 +15,7 @@
       <td style="width:15%">${liste/last_online}</td>
       <td>
           <span type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-eye-open" aria-hidden="true" title="${text/structure_activ_monitoring | NULL}" tal:condition="php:liste['active'] == 'yes' | NULL" />
-          <span type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-envelope" aria-hidden="true"  title="${text/structure_email_message_on | NULL}" tal:condition="php:liste['email'] == 'yes' | NULL" src="${getPath}/assets/images/email.png" />
+          <span type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-envelope" aria-hidden="true"  title="${text/structure_email_message_on | NULL}" tal:condition="php:liste['email'] == 'yes' | NULL" />
           <span type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-phone" aria-hidden="true" title="${text/structure_push_message_on | NULL}" tal:condition="php:liste['pushover'] == 'yes' | NULL" />
         </td>
       <td style="text-align:right;">

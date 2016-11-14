@@ -68,7 +68,7 @@
       <tr style="background-color:#e3e3e3; font-weight: bold;">
         <td style="width:850px;">
           ${text/inventory_hardware_more | NULL}
-          <a style="float:right;cursor:pointer;" onclick="insertInputFieldName('${text/structur_metatags_placeholder | NULL}');insertInputFieldValue('${text/structure_metatags_value | NULL}');"><img src="${getPath}/assets/icons/add.png" /></a>
+          <a type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-plus" aria-hidden="true" style="float:right;cursor:pointer;" onclick="insertInputFieldName('${text/structur_metatags_placeholder | NULL}');insertInputFieldValue('${text/structure_metatags_value | NULL}');" />
         </td>
       </tr>
     </table>
@@ -77,11 +77,7 @@
       <tr id="${details/id | NULL}">
         <td style="width:300px;"><input type="text" id="name_${details/id | NULL}" name="detail_name[]" value="${details/form_name | NULL}" class="form-control" /></td>
         <td style="width:500px;"><input type="text" id="value_${details/id | NULL}" name="detail_value[]" value="${details/form_value | NULL}" class="form-control" /></td>
-        <td style="width:40px;">
-          <a style="cursor:pointer;float:right;" onclick="removeField('${details/id | NULL}'); document.getElementById('${details/id | NULL}').style.display = 'none';">
-            <img src="${getPath}/assets/icons/del.png" />
-          </a>
-        </td>
+        <td style="width:40px;"><a type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-remove" aria-hidden="true" style="cursor:pointer;float:right;" onclick="removeField('${details/id | NULL}'); document.getElementById('${details/id | NULL}').style.display = 'none';" /></td>
       </tr>
     </table>
 

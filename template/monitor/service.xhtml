@@ -11,14 +11,10 @@
         <td colspan="2" style="width:850px;">
           ${text/monitor_service_new_service | NULL}
           <span tal:condition="service_detail/home_system | NULL" style="float:right">
-            <a title="${text/monitor_service_server_details | NULL}" href="/server/detail/${service_detail/home_system | NULL}">
-            <img src="${getPath}/assets/icons/server.png" />
-            </a>
+            <a type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-briefcase" aria-hidden="true" title="${text/monitor_service_server_details | NULL}" href="/server/detail/${service_detail/home_system | NULL}" />
           </span>
           <span tal:condition="server_detail/id | NULL" style="float:right">
-            <a title="S${text/monitor_service_server_details | NULL}" href="/server/detail/${server_detail/id | NULL}">
-            <img src="${getPath}/assets/icons/server.png" />
-            </a>
+            <a type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-briefcase" aria-hidden="true" title="${text/monitor_service_server_details | NULL}" href="/server/detail/${server_detail/id | NULL}" />
           </span>
         </td>
       </tr>
