@@ -29,20 +29,6 @@
     </table>
   </div> 
   
-  <div class="list-group margin-b-3" tal:condition="Blaetter | NULL">
-    <table>
-      <tr style="background-color:#e3e3e3; font-weight: bold;">
-        <td style="width:283px;text-align:left;">
-          <a class="btn btn-primary" tal:condition="php:aSession['db_limit']['prev'] >= 0 | NULL" href="${getPath}/${controller}/${methode}/liste/${aSession/db_limit/prev}">${text/system_previous_page | NULL}</a>
-          <span tal:condition="php:aSession['db_limit']['prev'] < 0 | NULL">${text/system_previous_page | NULL}</span>
-        </td>
-        <td style="width:283px;text-align:center;">${aSession/db_summe | NULL} ${text/system_total_records | NULL}</td>
-        <td style="width:283px;text-align:right;">
-          <a class="btn btn-primary" tal:condition="php:aSession['db_limit']['next'] < aSession['db_summe'] | NULL" href="${getPath}/${controller}/${methode}/liste/${aSession/db_limit/next}">${text/system_next_page | NULL}</a>
-          <span tal:condition="php:aSession['db_limit']['next'] > aSession['db_summe'] | NULL">${text/system_next_page | NULL}</span>
-        </td>
-      </tr>
-    </table>
-  </div>
+  <tal:block tal:condition="Blaetter | NULL" metal:use-macro="structure/blaetter.xhtml/standard" />
   
 </tal:block>

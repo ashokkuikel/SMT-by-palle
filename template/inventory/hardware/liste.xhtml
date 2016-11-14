@@ -3,12 +3,12 @@
   <div class="list-group margin-b-3">
     <table>
       <tr style="background-color:#e3e3e3; font-weight: bold;">
-        <td style="width:15%;"><a href="${getPath}/inventory/hardware/order/kategorie">${text/inventory_hardware_category | NULL}</a></td>
-        <td style="width:20%;"><a href="${getPath}/inventory/hardware/order/hersteller">${text/inventory_hardware_manufacturer | NULL}</a></td>
-        <td style="width:20%;"><a href="${getPath}/inventory/hardware/order/modell">${text/inventory_hardware_model | NULL}</a></td>
-        <td style="width:15%;"><a href="${getPath}/inventory/hardware/order/inventarnummer">${text/inventory_hardware_inventory | NULL}</a></td>
-        <td style="width:10%"><a href="${getPath}/inventory/hardware/order/zuordnung">${text/inventory_hardware_assignment | NULL}</a></td>
-        <td style="width:10%;"><a href="${getPath}/inventory/hardware/order/kaufdatum">${text/inventory_hardware_date_of_purchase | NULL}</a></td>
+        <td style="width:15%;">${text/inventory_hardware_category | NULL}</td>
+        <td style="width:20%;">${text/inventory_hardware_manufacturer | NULL}</td>
+        <td style="width:20%;">${text/inventory_hardware_model | NULL}</td>
+        <td style="width:15%;">${text/inventory_hardware_inventory | NULL}</td>
+        <td style="width:10%">${text/inventory_hardware_assignment | NULL}</td>
+        <td style="width:10%;">${text/inventory_hardware_date_of_purchase | NULL}</td>
         <td style="width:10%;">
           <span style="float:right">
             <a type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-plus" aria-hidden="true" tal:condition="php:_SESSION['admin'] == True' | NULL" title="${text/structure_new_license | NULL}" href="${getPath}/inventory/hardware/new" />
@@ -23,7 +23,7 @@
         <td>${list/inventarnummer | NULL}</td>
         <td>${list/zuordnung | NULL}</td>
         <td>${list/kaufdatum | NULL}</td>
-        <td style="width:10%;">
+        <td>
           <span tal:condition="php:_SESSION['admin'] == True' | NULL" style="float:right">
             <a type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-edit" aria-hidden="true" title="${text/vmware_detail_edit | NULL}" href="${getPath}/${controller}/${methode}/edit/${list/id}" />
             <a type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-remove" aria-hidden="true" title="${text/structur_system_del | NULL}" href="${getPath}/${controller}/${methode}/delete/${list/id}" onclick="return confirm('${text/inventory_hardware_delete | NULL}');" />
@@ -33,20 +33,6 @@
     </table>
   </div> 
   
-  <div class="list-group margin-b-3" tal:condition="Blaetter | NULL">
-    <table>
-      <tr style="background-color:#e3e3e3; font-weight: bold;">
-        <td style="width:283px;text-align:left;">
-          <a class="btn btn-primary" tal:condition="php:aSession['db_limit']['prev'] >= 0 | NULL" href="${getPath}/${controller}/${methode}/liste/${aSession/db_limit/prev}">${text/system_previous_page | NULL}</a>
-          <span tal:condition="php:aSession['db_limit']['prev'] < 0 | NULL">${text/system_previous_page | NULL}</span>
-        </td>
-        <td style="width:283px;text-align:center;">${aSession/db_summe | NULL} ${text/system_total_records | NULL}</td>
-        <td style="width:283px;text-align:right;">
-          <a class="btn btn-primary" tal:condition="php:aSession['db_limit']['next'] < aSession['db_summe'] | NULL" href="${getPath}/${controller}/${methode}/liste/${aSession/db_limit/next}">${text/system_next_page | NULL}</a>
-          <span tal:condition="php:aSession['db_limit']['next'] > aSession['db_summe'] | NULL">${text/system_next_page | NULL}</span>
-        </td>
-      </tr>
-    </table>
-  </div>
+  <tal:block tal:condition="Blaetter | NULL" metal:use-macro="structure/blaetter.xhtml/standard" />
   
 </tal:block>

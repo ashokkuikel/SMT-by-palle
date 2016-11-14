@@ -20,9 +20,9 @@
           <td style="width:10%;">${liste/port}</td>
           <td style="width:15%;">${liste/last_online}</td>
           <td style="width:15%;">
-            <span type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-eye-open" aria-hidden="true"  title="${text/structure_activ_monitoring | NULL}" tal:condition="php:liste['active'] == 'yes' | NULL" src="${getPath}/assets/images/monitor.png" />
-            <span type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-envelope" aria-hidden="true"   title="${text/structure_email_message_on | NULL}" tal:condition="php:liste['email'] == 'yes' | NULL" src="${getPath}/assets/images/email.png" />
-            <span type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-phone" aria-hidden="true"  title="${text/structure_push_message_on | NULL}" tal:condition="php:liste['pushover'] == 'yes' | NULL" src="${getPath}/assets/images/pushover.png" />
+            <span aria-label="Left Align" class="glyphicon glyphicon-eye-open" aria-hidden="true" title="${text/structure_activ_monitoring | NULL}" tal:condition="php:liste['active'] == 'yes' | NULL" />
+            <span aria-label="Left Align" class="glyphicon glyphicon-envelope" aria-hidden="true" title="${text/structure_email_message_on | NULL}" tal:condition="php:liste['email'] == 'yes' | NULL" />
+            <span aria-label="Left Align" class="glyphicon glyphicon-phone" aria-hidden="true" title="${text/structure_push_message_on | NULL}" tal:condition="php:liste['pushover'] == 'yes' | NULL" />
           </td>
           <td style="width:10%; text-align:right;">
             <span tal:condition="php:_SESSION['admin'] == True' | NULL">
@@ -48,16 +48,16 @@
           <td style="width:25px;">
             <img tal:condition="php:liste['active'] == 'yes' | NULL" border="0" style="width:20px;height:20px;" src="${getPath}/assets/images/${liste/status}.png" />
           </td>
-          <td style="width:420px;"><a href="${getPath}/monitor/detail/${liste/server_id}">${liste/label}</a></td>
-          <td style="width:100px;">${liste/type}</td>
-          <td style="width:75px;">${liste/port}</td>
-          <td style="width:125px;">${liste/last_online}</td>
-          <td style="width:55px;">
-            <img title="${text/structure_activ_monitoring | NULL}" tal:condition="php:liste['active'] == 'yes' | NULL" src="${getPath}/assets/images/monitor.png" />
-            <img title="${text/structure_email_message_on | NULL}" tal:condition="php:liste['email'] == 'yes' | NULL" src="${getPath}/assets/images/email.png" />
-            <img title="${text/structure_push_message_on | NULL}" tal:condition="php:liste['pushover'] == 'yes' | NULL" src="${getPath}/assets/images/pushover.png" />
+          <td style="width:40%;"><a href="${getPath}/monitor/detail/${liste/server_id}">${liste/label}</a></td>
+          <td style="width:10%;">${liste/type}</td>
+          <td style="width:10%;">${liste/port}</td>
+          <td style="width:15%;">${liste/last_online}</td>
+          <td style="width:15%;">
+            <span aria-label="Left Align" class="glyphicon glyphicon-eye-open" aria-hidden="true" title="${text/structure_activ_monitoring | NULL}" tal:condition="php:liste['active'] == 'yes' | NULL" />
+            <span aria-label="Left Align" class="glyphicon glyphicon-envelope" aria-hidden="true" title="${text/structure_email_message_on | NULL}" tal:condition="php:liste['email'] == 'yes' | NULL" />
+            <span aria-label="Left Align" class="glyphicon glyphicon-phone" aria-hidden="true" title="${text/structure_push_message_on | NULL}" tal:condition="php:liste['pushover'] == 'yes' | NULL" />
           </td>
-          <td style="width:50px; text-align:right;">
+          <td style="width:10%; text-align:right;">
             <a tal:condition="php:_SESSION['admin'] == True' | NULL" title="${text/structure_depende_del | NULL}" href="${getPath}/monitor/service/delete_relation/${server_detail/id}/${liste/server_id}" onclick="return confirm('${text/structure_list_delet | NULL}');"><img src="${getPath}/assets/icons/del.png" /></a>
           </td>
         </tr>

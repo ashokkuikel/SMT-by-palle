@@ -15,53 +15,53 @@
       </tr>
 
       <tr>
-        <td style="width:200px;">${text/inventory_hardware_designation | NULL}</td>
-        <td style="width:600px;">${server_detail/bezeichnung}</td>
+        <td style="width:25%;">${text/inventory_hardware_designation | NULL}</td>
+        <td style="width:75%">${server_detail/bezeichnung}</td>
       </tr>
       
       <tr tal:condition="server_detail/inventarnummer | NULL">
-        <td style="width:200px;">${text/inventory_hardware_inventorynumber | NULL}</td>
-        <td style="width:600px;">${server_detail/inventarnummer}</td>
+        <td>${text/inventory_hardware_inventorynumber | NULL}</td>
+        <td>${server_detail/inventarnummer}</td>
       </tr>
 
       <tr>
-        <td style="width:200px;">${text/inventory_host | NULL}</td>
-        <td style="width:600px;">${server_detail/hostname}</td>
+        <td>${text/inventory_host | NULL}</td>
+        <td>${server_detail/hostname}</td>
       </tr>
 
       <tr tal:condition="server_detail/aliase | NULL">
-        <td style="width:200px;">${text/structure_details_aliase | NULL}</td>
-        <td style="width:600px;">${server_detail/aliase}</td>
+        <td>${text/structure_details_aliase | NULL}</td>
+        <td>${server_detail/aliase}</td>
       </tr>
 
       <tr>
-        <td style="width:200px;">${text/inventory_ip | NULL}</td>
-        <td style="width:600px;">${server_detail/ipadressen}</td>
+        <td>${text/inventory_ip | NULL}</td>
+        <td>${server_detail/ipadressen}</td>
       </tr>
 
       <tr>
-        <td style="width:200px;">${text/structure_details_location | NULL}</td>
-        <td style="width:600px;">${server_detail/standort}</td>
+        <td>${text/structure_details_location | NULL}</td>
+        <td>${server_detail/standort}</td>
       </tr>
 
       <tr>
-        <td style="width:200px;">${text/structure_details_os | NULL}</td>
-        <td style="width:600px;">${server_detail/betriebssystem}</td>
+        <td>${text/structure_details_os | NULL}</td>
+        <td>${server_detail/betriebssystem}</td>
       </tr>
 
       <tr>
-        <td style="width:200px;">${text/structure_details_hardware | NULL}</td>
-        <td style="width:600px;">${server_detail/technischedaten}</td>
+        <td>${text/structure_details_hardware | NULL}</td>
+        <td>${server_detail/technischedaten}</td>
       </tr>
 
       <tr tal:condition="server_detail/verwendungszweck | NULL">
-        <td style="width:200px;">${text/structure_details_use | NULL}</td>
-        <td style="width:600px;">${server_detail/verwendungszweck}</td>
+        <td>${text/structure_details_use | NULL}</td>
+        <td>${server_detail/verwendungszweck}</td>
       </tr>
 
       <tr>
-        <td style="width:200px;">${text/inventory_hardware_description | NULL}</td>
-        <td style="width:600px;">${structure server_detail/beschreibung}</td>
+        <td>${text/inventory_hardware_description | NULL}</td>
+        <td>${structure server_detail/beschreibung}</td>
       </tr>
       
       <tr style="background-color:#e3e3e3; font-weight: bold;" tal:condition="server_detail/details | NULL">
@@ -69,8 +69,8 @@
       </tr>
 
       <tr tal:condition="server_detail/detail | NULL" tal:repeat="details server_detail/detail">
-        <td style="width:200px;">${details/form_name}</td>
-        <td style="width:600px;">${structure details/form_value}</td>
+        <td>${details/form_name}</td>
+        <td>${structure details/form_value}</td>
       </tr>
 
     </table>

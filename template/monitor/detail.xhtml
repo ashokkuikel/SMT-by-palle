@@ -1,17 +1,17 @@
 <tal:block metal:define-macro="standard">
   
-  <tal:block metal:use-macro="structure/system.xhtml/service_detail"></tal:block>
-  
-  <span tal:condition="php:count(detail['log']) > 0 | NULL">
-    <tal:block metal:use-macro="structure/system.xhtml/service_log_detail"></tal:block>
-  </span>
+  <tal:block metal:use-macro="structure/system.xhtml/service_detail" />
   
   <span tal:condition="graphs | NULL">
-    <tal:block metal:use-macro="structure/history.xhtml/standard"></tal:block>
+    <tal:block metal:use-macro="structure/history.xhtml/standard" />
+  </span>
+  
+  <span tal:condition="php:count(detail['log']) > 0 | NULL">
+    <tal:block metal:use-macro="structure/system.xhtml/service_log_detail" />
   </span>
   
   <span tal:condition="php:_SESSION['admin'] == True' | NULL">
-		<a title="${text/monitor_detail_service_edit | NULL}" href="${getPath}/${controller}/service/edit/${detail/server_id | NULL}"><button type="submit" class="btn btn-success" style="width:200px;float:left;">${text/monitor_detail_service_edit | NULL}</button></a>
+		<a title="${text/monitor_detail_service_edit | NULL}" href="${getPath}/${controller}/service/edit/${detail/server_id | NULL}"><button type="submit" class="btn btn-success" style="float:left;">${text/monitor_detail_service_edit | NULL}</button></a>
   </span>
   
 </tal:block>
