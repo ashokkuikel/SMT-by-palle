@@ -1,36 +1,33 @@
 <tal:block metal:define-macro="standard">
   
-  <div class="list-group margin-b-3">
-    <table>      
-      <tr style="background-color:#e3e3e3; font-weight: bold;">
-        <td  width="30%">
-          <a tal:condition="csv_export | NULL" href="${getPath}${getURL}/export" title="${text/structure_inv_service_download | NULL}"><img src="${getPath}/assets/icons/doc_excel_csv.png" /></a>
-          ${text/inventory_hardware_designation | NULL}
-        </td>
-        <td width="20%">${text/inventory_host | NULL}</td>
-        <td width="20%">${text/inventory_ip | NULL}</td>
-        <td width="15%">${text/structure_details_location | NULL}</td>
-        <td width="15%" style="text-align:right;"></td>
-      </tr>
+  <table>      
+    <tr style="background-color:#e3e3e3; font-weight: bold;">
+      <td  width="30%">
+        <a type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-paperclip" aria-hidden="true" href="${getPath}${getURL}/export" title="${text/structure_inv_service_download | NULL}" />
+        ${text/inventory_hardware_designation | NULL}
+      </td>
+      <td width="20%">${text/inventory_host | NULL}</td>
+      <td width="20%">${text/inventory_ip | NULL}</td>
+      <td width="15%">${text/structure_details_location | NULL}</td>
+      <td width="15%" style="text-align:right;"></td>
+    </tr>
 
-      <tr class="tr" tal:repeat="liste server_liste">
-        <td class="td">
-          <a href="${getPath}/${liste/serverart | NULL}/detail/${liste/id}">${liste/bezeichnung}</a>
-        </td>
-        <td>${liste/hostname}</td>
-        <td>${liste/ipadressen}</td>
-        <td>${liste/standort}</td>
-        <td style="text-align:right;">
-          <a type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-alert" aria-hidden="true" tal:condition="php:liste['wartung'] == 1 | NULL" title="${text/inventory_server_mt_off | NULL}" href="${getPath}/${controller}/wartung/off/${liste/id}" />
-          <span tal:condition="php:_SESSION['admin'] == True' | NULL">
-            <a type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-edit" aria-hidden="true" title="${text/vmware_detail_edit | NULL}" href="${getPath}/${liste/serverart | NULL}/edit/${liste/id}" />
-            <a type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-remove" aria-hidden="true" title="${text/structur_system_del | NULL}" href="${getPath}/${liste/serverart | NULL}/delete/${liste/id}" onclick="return confirm('${text/inventory_hardware_delete | NULL}');" />
-          </span>
-        </td>
-      </tr>
-    </table>
-  </div> 
-    
+    <tr class="tr" tal:repeat="liste server_liste">
+      <td class="td">
+        <a href="${getPath}/${liste/serverart | NULL}/detail/${liste/id}">${liste/bezeichnung}</a>
+      </td>
+      <td>${liste/hostname}</td>
+      <td>${liste/ipadressen}</td>
+      <td>${liste/standort}</td>
+      <td style="text-align:right;">
+        <a type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-alert" aria-hidden="true" tal:condition="php:liste['wartung'] == 1 | NULL" title="${text/inventory_server_mt_off | NULL}" href="${getPath}/${controller}/wartung/off/${liste/id}" />
+        <span tal:condition="php:_SESSION['admin'] == True' | NULL">
+          <a type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-edit" aria-hidden="true" title="${text/vmware_detail_edit | NULL}" href="${getPath}/${liste/serverart | NULL}/edit/${liste/id}" />
+          <a type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-remove" aria-hidden="true" title="${text/structur_system_del | NULL}" href="${getPath}/${liste/serverart | NULL}/delete/${liste/id}" onclick="return confirm('${text/inventory_hardware_delete | NULL}');" />
+        </span>
+      </td>
+    </tr>
+  </table>    
     
   <tal:block tal:condition="Blaetter | NULL" metal:use-macro="structure/blaetter.xhtml/standard" />
   

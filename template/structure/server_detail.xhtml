@@ -1,78 +1,76 @@
 <tal:block metal:define-macro="standard">
-  <div class="list-group margin-b-3">
-    <table>
-      <tr style="background-color:#e3e3e3; font-weight: bold;">
-        <td colspan="2" style="width:840px;">
-          ${text/structure_details_details | NULL}: ${server_detail/bezeichnung}
-          <span style="float:right;">
-            <a type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-alert" aria-hidden="true" tal:condition="php:server_detail['wartung'] == 1 | NULL" title="${text/inventory_server_mt_off | NULL}" href="${getPath}/${controller}/wartung/off/${server_detail/id}" />
-            <a type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-edit" aria-hidden="true" tal:condition="php:_SESSION['admin'] == True' | NULL" title="${text/vmware_detail_edit | NULL}" href="${getPath}/${controller}/edit/${server_detail/id}" />
-            <a type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-globe" aria-hidden="true" title="${text/inventory_license_update_dns | NULL}" href="${getPath}${getURL}/dnsreload" />
-            <a type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-floppy-saved" aria-hidden="true" tal:condition="add_favorite | NULL" title="${text/inventory_server_fav_save | NULL}" href="${getPath}${getURL}/favorite" />
-            <a type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-floppy-remove" aria-hidden="true" tal:condition="del_favorite | NULL" title="${text/inventory_server_fav_del | NULL}" href="${getPath}${getURL}/favorite" />
-          </span>
-        </td>
-      </tr>
+  <table>
+    <tr style="background-color:#e3e3e3; font-weight: bold;">
+      <td colspan="2" style="width:840px;">
+        ${text/structure_details_details | NULL}: ${server_detail/bezeichnung}
+        <span style="float:right;">
+          <a type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-alert" aria-hidden="true" tal:condition="php:server_detail['wartung'] == 1 | NULL" title="${text/inventory_server_mt_off | NULL}" href="${getPath}/${controller}/wartung/off/${server_detail/id}" />
+          <a type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-edit" aria-hidden="true" tal:condition="php:_SESSION['admin'] == True' | NULL" title="${text/vmware_detail_edit | NULL}" href="${getPath}/${controller}/edit/${server_detail/id}" />
+          <a type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-globe" aria-hidden="true" title="${text/inventory_license_update_dns | NULL}" href="${getPath}${getURL}/dnsreload" />
+          <a type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-floppy-saved" aria-hidden="true" tal:condition="add_favorite | NULL" title="${text/inventory_server_fav_save | NULL}" href="${getPath}${getURL}/favorite" />
+          <a type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-floppy-remove" aria-hidden="true" tal:condition="del_favorite | NULL" title="${text/inventory_server_fav_del | NULL}" href="${getPath}${getURL}/favorite" />
+        </span>
+      </td>
+    </tr>
 
-      <tr>
-        <td style="width:25%;">${text/inventory_hardware_designation | NULL}</td>
-        <td style="width:75%">${server_detail/bezeichnung}</td>
-      </tr>
-      
-      <tr tal:condition="server_detail/inventarnummer | NULL">
-        <td>${text/inventory_hardware_inventorynumber | NULL}</td>
-        <td>${server_detail/inventarnummer}</td>
-      </tr>
+    <tr>
+      <td style="width:25%;">${text/inventory_hardware_designation | NULL}</td>
+      <td style="width:75%">${server_detail/bezeichnung}</td>
+    </tr>
 
-      <tr>
-        <td>${text/inventory_host | NULL}</td>
-        <td>${server_detail/hostname}</td>
-      </tr>
+    <tr tal:condition="server_detail/inventarnummer | NULL">
+      <td>${text/inventory_hardware_inventorynumber | NULL}</td>
+      <td>${server_detail/inventarnummer}</td>
+    </tr>
 
-      <tr tal:condition="server_detail/aliase | NULL">
-        <td>${text/structure_details_aliase | NULL}</td>
-        <td>${server_detail/aliase}</td>
-      </tr>
+    <tr>
+      <td>${text/inventory_host | NULL}</td>
+      <td>${server_detail/hostname}</td>
+    </tr>
 
-      <tr>
-        <td>${text/inventory_ip | NULL}</td>
-        <td>${server_detail/ipadressen}</td>
-      </tr>
+    <tr tal:condition="server_detail/aliase | NULL">
+      <td>${text/structure_details_aliase | NULL}</td>
+      <td>${server_detail/aliase}</td>
+    </tr>
 
-      <tr>
-        <td>${text/structure_details_location | NULL}</td>
-        <td>${server_detail/standort}</td>
-      </tr>
+    <tr>
+      <td>${text/inventory_ip | NULL}</td>
+      <td>${server_detail/ipadressen}</td>
+    </tr>
 
-      <tr>
-        <td>${text/structure_details_os | NULL}</td>
-        <td>${server_detail/betriebssystem}</td>
-      </tr>
+    <tr>
+      <td>${text/structure_details_location | NULL}</td>
+      <td>${server_detail/standort}</td>
+    </tr>
 
-      <tr>
-        <td>${text/structure_details_hardware | NULL}</td>
-        <td>${server_detail/technischedaten}</td>
-      </tr>
+    <tr>
+      <td>${text/structure_details_os | NULL}</td>
+      <td>${server_detail/betriebssystem}</td>
+    </tr>
 
-      <tr tal:condition="server_detail/verwendungszweck | NULL">
-        <td>${text/structure_details_use | NULL}</td>
-        <td>${server_detail/verwendungszweck}</td>
-      </tr>
+    <tr>
+      <td>${text/structure_details_hardware | NULL}</td>
+      <td>${server_detail/technischedaten}</td>
+    </tr>
 
-      <tr>
-        <td>${text/inventory_hardware_description | NULL}</td>
-        <td>${structure server_detail/beschreibung}</td>
-      </tr>
-      
-      <tr style="background-color:#e3e3e3; font-weight: bold;" tal:condition="server_detail/details | NULL">
-        <td colspan="2">${text/structure_details_more | NULL}</td>
-      </tr>
+    <tr tal:condition="server_detail/verwendungszweck | NULL">
+      <td>${text/structure_details_use | NULL}</td>
+      <td>${server_detail/verwendungszweck}</td>
+    </tr>
 
-      <tr tal:condition="server_detail/detail | NULL" tal:repeat="details server_detail/detail">
-        <td>${details/form_name}</td>
-        <td>${structure details/form_value}</td>
-      </tr>
+    <tr>
+      <td>${text/inventory_hardware_description | NULL}</td>
+      <td>${structure server_detail/beschreibung}</td>
+    </tr>
 
-    </table>
-  </div>
+    <tr style="background-color:#e3e3e3; font-weight: bold;" tal:condition="server_detail/details | NULL">
+      <td colspan="2">${text/structure_details_more | NULL}</td>
+    </tr>
+
+    <tr tal:condition="server_detail/detail | NULL" tal:repeat="details server_detail/detail">
+      <td>${details/form_name}</td>
+      <td>${structure details/form_value}</td>
+    </tr>
+
+  </table>
 </tal:block>

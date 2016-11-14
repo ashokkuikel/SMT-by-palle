@@ -1,9 +1,11 @@
 <tal:block metal:define-macro="standard">
-  <div class="list-group margin-b-3">
+
     <div class="panel panel-default">
+
       <div class="panel-heading">
         <h4 class="panel-title">${text/structure_search_searchtext | NULL}</h4>
       </div>
+
       <div class="panel-body">
         <form action="${getPath}/${controller}/search" method="post">
         <input type="hidden" name="methode" value="${methode | NULL}" />
@@ -19,7 +21,7 @@
 				</div>
 			</form>			
       </div>
+      
     </div>
-  </div>
   
 </tal:block>
