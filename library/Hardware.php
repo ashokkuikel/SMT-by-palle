@@ -104,7 +104,7 @@ class Hardware {
   }
   
   /**
-   * 
+   * Methode zum löschen eines Eintrags
    * @param type $id
    */
   public function deleteHardware($id) {

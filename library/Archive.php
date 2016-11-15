@@ -59,6 +59,4 @@ class Archive {
     }
     return $this;
   }
-
-  //ToDo: Aufräumen der DB implememtieren
 }

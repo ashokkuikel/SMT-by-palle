@@ -98,6 +98,9 @@ class Handler extends Texte{
     }
   }
 
+  /**
+   * Methode zur Darstellung eines DNS Fehlers
+  **/
   public function checkSystemDNS() {
     $db = new Database('SMT-ADMIN');
     $session = Session::getInstance();
@@ -110,6 +113,9 @@ class Handler extends Texte{
     }
   }
 
+  /**
+   * Methode zum auslesen des letzzten Updates
+  **/
   public function getLastUpdate() {
     $db = new Database('SMT-MONITOR');
     $result = $db->getQuery("SELECT * FROM psm_last_update ORDER BY last_update DESC LIMIT 1", array(), True);

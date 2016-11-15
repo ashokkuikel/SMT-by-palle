@@ -54,7 +54,7 @@ class Notifier {
     if ($this->server['pushover'] == 'yes') {
       $this->notifyByPushover($this->server['user']);
     }
-
+    
     return $notify;
   }
 

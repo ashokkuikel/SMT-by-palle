@@ -9,6 +9,11 @@
 
 class UptimeArchiver {
 
+  /**
+   * Build a archive
+   * @param int $server_id
+   * @return boolean
+   */
   public function archive($server_id = null) {
     $db = new Database('SMT-MONITOR');
     $latest_date = new DateTime('-1 week 0:0:0');
@@ -23,7 +28,6 @@ class UptimeArchiver {
 
 
     if (!empty($records)) {
-      // first group all records by day and server_id
       $data_by_day = array();
       foreach ($records as $record) {
         $server_id = (int) $record['server_id'];
@@ -34,7 +38,6 @@ class UptimeArchiver {
         $data_by_day[$day][$server_id][] = $record;
       }
 
-      // now get history data day by day
       $histories = array();
       foreach ($data_by_day as $day => $day_records) {
         foreach ($day_records as $server_id => $server_day_records) {
@@ -42,9 +45,7 @@ class UptimeArchiver {
         }
       }
 
-      // Save all
       $db->insertMultiple('psm_servers_history', $histories);
-      // now remove all records from the uptime table
       $db->getQuery(
         "DELETE FROM `psm_servers_uptime` WHERE {$sql_where_server} `date` < :latest_date", array('latest_date' => $latest_date_str), false
       );
@@ -87,7 +88,6 @@ class UptimeArchiver {
 
   protected function createSQLWhereServer($server_id) {
     $sql_where_server = ($server_id !== null)
-      // this is obviously not the cleanest way to implement this when using paramter binding.. sorry.
       ? ' `server_id` = ' . intval($server_id) . ' AND ' : '';
 
     return $sql_where_server;

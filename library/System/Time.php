@@ -8,6 +8,13 @@
   */
 
   class Time {
+    
+    /**
+   * pluralize
+   *
+   * @param <string> $count        	
+   * @param <beliebig> $text
+   */
     public function pluralize( $count, $text )
     {
         $v = $count . ( ( $count == 1 ) ? ( " $text" ) : ( " ${text}en" ) );
@@ -15,6 +22,10 @@
         return str_replace("een", "en", $v);
     }
 
+    /**
+   * Anzeige der letzten Updateaktion
+   * @param <string> $datetime        	
+   */
     public function ago( $datetime )
     {
         $interval = date_create('now')->diff( $datetime );

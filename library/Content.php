@@ -101,19 +101,6 @@ class Content extends Template {
       return $subcontroller;
     }
   }
-
-  private function autoLoader() {
-    if (!is_null($this->get('loader'))) {
-      $class = explode(',', $this->get('loader'));
-
-      if (count($class) >= 1 && !empty($class ['0'])) {
-        for ($i = 0; $i < count($class); $i ++) {
-          $this->registerClass($class [$i]);
-        }
-      }
-    }
-  }
-
 }
 
 ?>

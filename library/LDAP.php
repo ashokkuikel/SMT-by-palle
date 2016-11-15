@@ -27,15 +27,29 @@ class LDAP {
   // Benutzerlogin speichern
   public $isAuth = False;
 
+  /**
+   * Konstruktor, Config setzen und authentifizieren
+    @param type $user
+   * @param type $pass
+   * @param type $conf
+   */
   public function __construct($user, $pass, $conf) {
     $this->setConfig($conf);
     $this->ldapAuth($user, $pass);
   }
   
+  /**
+   * Methode zur Prüfung ob der Benutzer eingeloggt ist
+   * @return boolean
+   */
   public function getAuth() {
     return $isAuth;
   }
   
+  /**
+   * Methode zum setzen der Konfiguration
+   * @param type $conf
+   */
   public function setConfig($conf) {
     $this->ldap_host = $conf['ldap_host'];
     $this->ldap_dn = $conf['ldap_dn'];
@@ -46,10 +60,10 @@ class LDAP {
     $this->ldap_pass = $conf['ldap_pass'];
   }
 
-  /*
+  /**
    * Prüfung ob der User eingeloggt ist
+   * @param $sUser
    */
-
   public function checkUser($sUser) {
     // Gruppe prüfen ob Admin
     if (!$_SESSION['admin']) {
