@@ -7,7 +7,11 @@
  * @package   Library
  */
 
-interface iBase {
+class Base extends Content {
+
+  public function __construct() {
+    parent::__construct();
+  }
 
   /**
    * Standardsetter der Anwendung
@@ -15,7 +19,9 @@ interface iBase {
    * @param <string> $sName        	
    * @param <beliebig> $sValue        	
    */
-  public function set($sName, $sValue, $text = False);
+  public function set($sName, $sValue, $text = False) {
+    $this->$sName = $sValue;
+  }
 
   /**
    * Standardgetter der Anwendung
@@ -23,14 +29,24 @@ interface iBase {
    * @param <string> $sName        	
    * @return <beliebig>
    */
-  public function get($sName);
+  public function get($sName) {
+    if (property_exists($this, $sName)) {
+      return $this->$sName;
+    } else {
+      return NULL;
+    }
+  }
 
   /**
    * INI Konfiguration oeffnen
    *
    * @param <string> $sFile        	
    */
-  public function getConfig($sFile);
+  public function getConfig($sFile) {
+    $aData = array();
+    $aData = parse_ini_file($sFile, TRUE);
+    $this->readConfig($aData);
+  }
 
   /**
    * Methode zum umleiten bzw.
@@ -40,78 +56,6 @@ interface iBase {
    * @param <type> $methode        	
    * @param <type> $full        	
    */
-  public function setRoute($controller, $methode, $full = TRUE);
-
-  /**
-   * Klasse dem System bereit stellen
-   *
-   * @param <type> $sClass        	
-   * @param <type> $bReturn        	
-   * @return <type> $gInstance
-   */
-  public function registerClass($sClass, $gInstance = False, $bReturn = False);
-
-  /**
-   * Erstellt einen beliebigen Zufallscode
-   *
-   * @staticvar <string> $code
-   * @param <integer> $iLength        	
-   * @return <string> code
-   */
-  public static function createCode($iLength = 8);
-
-  /**
-   * Methode zum speichern eines LogFiles
-   *
-   * @param <string> $file        	
-   * @param <string> $text        	
-   */
-  public function logFile($file, $text);
-
-  /**
-   * Konfigurationsdaten verabeiten und ueber
-   * den Standardgetter der Anwedung verarbeiten
-   *
-   * @param <array> $aData        	
-   */
-  public function readConfig($aData);
-
-  /**
-   * Methode zum erzeugen eines Downloads
-   *
-   * @param <string> $file        	
-   * @param <string> $dir        	
-   * @param <string> $type        	
-   */
-  public function makeDownload($file, $dir, $type);
-  
-  
-}
-
-class Base extends Content implements iBase {
-
-  public function __construct() {
-    parent::__construct();
-  }
-
-  public function set($sName, $sValue, $text = False) {
-    $this->$sName = $sValue;
-  }
-
-  public function get($sName) {
-    if (property_exists($this, $sName)) {
-      return $this->$sName;
-    } else {
-      return NULL;
-    }
-  }
-
-  public function getConfig($sFile) {
-    $aData = array();
-    $aData = parse_ini_file($sFile, TRUE);
-    $this->readConfig($aData);
-  }
-
   public function setRoute($controller, $methode, $full = TRUE) {
     if ($controller == '') {
       $url = $this->get('url');
@@ -135,6 +79,13 @@ class Base extends Content implements iBase {
     }
   }
 
+  /**
+   * Klasse dem System bereit stellen
+   *
+   * @param <type> $sClass        	
+   * @param <type> $bReturn        	
+   * @return <type> $gInstance
+   */
   public function registerClass($sClass, $gInstance = False, $bReturn = False) {
     if ($gInstance === True) {
       $this->set($sClass, True, False);
@@ -155,6 +106,13 @@ class Base extends Content implements iBase {
     }
   }
 
+  /**
+   * Erstellt einen beliebigen Zufallscode
+   *
+   * @staticvar <string> $code
+   * @param <integer> $iLength        	
+   * @return <string> code
+   */
   public static function createCode($iLength = 8) {
     static $code = '';
 
@@ -170,6 +128,12 @@ class Base extends Content implements iBase {
     return $code;
   }
 
+  /**
+   * Methode zum speichern eines LogFiles
+   *
+   * @param <string> $file        	
+   * @param <string> $text        	
+   */
   public function logFile($file, $text) {
     $folder = $this->get('logfiles') . date("Y") . date("m") . date("d");
     $file = $folder . '/' . $file;
@@ -183,19 +147,36 @@ class Base extends Content implements iBase {
     file_put_contents($file, $text);
   }
 
+  /**
+   * Konfigurationsdaten verabeiten und ueber
+   * den Standardgetter der Anwedung verarbeiten
+   *
+   * @param <array> $aData        	
+   */
   public function readConfig($aData) {
     foreach ($aData as $name => $value) {
       $this->set($name, $value);
     }
   }
 
+  /**
+   * Methode zum erzeugen eines Downloads
+   *
+   * @param <string> $file        	
+   * @param <string> $dir        	
+   * @param <string> $type        	
+   */
   public function makeDownload($file, $dir, $type) {
     header("Content-Type: $type");
     header("Content-Disposition: attachment; filename=\"$file\"");
     readfile($dir . $file);
   }
   
-  // Methode zur optimerten Darstellung der Speichereinheiten
+  /**
+   * Methode zur optimerten Darstellung der Speichereinheiten
+   *
+   * @param <int> $v
+   */
   public function size($v) {
     $measure = "Byte";
 

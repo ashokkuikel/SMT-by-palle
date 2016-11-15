@@ -9,6 +9,10 @@
 
 class Inventur {
   
+  /**
+   * Methode zum suche nach einer Hardware via Barcode
+   * @param type $barcode
+  **/
   public function searchItem($barcode) {
     $db=new Database('SMT-ADMIN');
     $barcode = str_replace('/', '-', $barcode);
@@ -25,6 +29,12 @@ class Inventur {
     
   }
   
+  /**
+   * methode zum speichern
+   * @todo wird aktuell nicht genutzt
+   * @param type $pass
+   * @param type $conf
+  **/
   public function saveItem($aValue, $sResult) {
     $db=new Database('SMT-ADMIN');
     
@@ -41,7 +51,10 @@ class Inventur {
     $db->getQuery($query, $value);
   }
   
-  
+  /**
+   * Auslesen aller Einträge
+   * @return array
+  **/
   public function readAllItems() {
     $db=new Database('SMT-ADMIN');
     
@@ -60,7 +73,10 @@ class Inventur {
     return $har;
   }
   
-  
+  /**
+   * Scan der inventur speichern
+   * @param type $post
+  **/
   public function saveScan($post) {
     $db=new Database('SMT-ADMIN');
 		$barcode = str_replace('/', '-', $post['barcode']);
@@ -71,7 +87,9 @@ class Inventur {
     $db->getQuery($query, $value);
   }
   
-  
+  /**
+   * Inventur zurücksetzen
+  **/
   public function clear() {
     $db=new Database('SMT-ADMIN');
     $db->getQuery("TRUNCATE wos_inventur", array(), True);

@@ -19,7 +19,6 @@ class SSH {
   private $log = '';
 
   public function __construct($host = '', $user = '', $password = '') {
-
     if ($host != '')
       $this->host = $host;
     if ($user != '')
@@ -33,8 +32,12 @@ class SSH {
     }
   }
 
+  /**
+   * Methode zum authentifizieren an der Shell
+   * @param type $user
+   * @param type password
+   */
   protected function authPassword($user = '', $password = '') {
-
     if ($user != '')
       $this->user = $user;
     if ($password != '')
@@ -45,6 +48,9 @@ class SSH {
     }
   }
 
+  /**
+   * Methode zum ausführen des Kommandos auf der Shell
+   */
   public function cmdExec() {
     $this->authPassword();
     $argc = func_num_args();
@@ -64,8 +70,10 @@ class SSH {
     return fread($stream, 4096);
   }
 
+  /**
+   * Methode zum lesen des logs
+   */
   public function getLog() {
-
     return $this->log;
   }
 

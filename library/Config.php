@@ -9,6 +9,9 @@
 
 class Config extends Language {
 
+  /**
+   * Konstruktor, Config setzen und Autoloader starten
+  **/
   public function __construct() {
     $this->set('url', explode('/', substr(filter_input(INPUT_SERVER, 'REQUEST_URI'), 1)));
 
@@ -19,6 +22,9 @@ class Config extends Language {
     parent::__construct();
   }
 
+  /**
+   * Einlesen der Konfiguration
+  **/
   public function loadConfig() {
     $url = $this->get('url');
 
@@ -49,6 +55,9 @@ class Config extends Language {
     $this->set('project', $project);
   }
 
+  /**
+   * Konstruktor, Config setzen und authentifizieren
+  **/
   public function autoLoader() {
     if (!is_null($this->get('loader'))) {
       $class = explode(',', $this->get('loader'));

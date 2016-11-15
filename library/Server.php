@@ -21,6 +21,9 @@ class Server extends Service {
     }
   }
 
+  /**
+   * getter für die IP Adressliste
+   */
   public function getSystemIPs() {
     $db = new Database('SMT-ADMIN');
     $db->getQuery("SELECT * FROM wos_server ORDER BY INET_ATON(ipadressen)", array());
@@ -28,6 +31,11 @@ class Server extends Service {
     return $db->getValue();
   }
 
+  /**
+   * Getter für die Systeme die aktuealisiert werden sollen, nach Priorität sortiert
+   * @param type $prio
+   * @return array
+   */
   public function getAllUpdateSystem($prio) {
     $db = new Database('SMT-ADMIN');
     $db->getQuery("SELECT id FROM wos_server WHERE prio=:prio", array(':prio' => $prio));
@@ -247,6 +255,11 @@ class Server extends Service {
     return $id;
   }
 
+  /**
+   * Eine einzelne Relation löschen
+   * @param type $sid
+   * @param type $rid
+   */
   public function deleteSingleRelation($sid, $rid) {
     $db = new Database('SMT-ADMIN');
 
@@ -262,11 +275,13 @@ class Server extends Service {
 
     $relationen = implode(",", array_values($relationen));
     $query = "UPDATE wos_server SET service_relations=:service_relations WHERE id=:id";
+    
     $db->getQuery($query, array(':id' => $sid, ':service_relations' => $relationen));
   }
 
   /**
-   * Funktion zum vollständigen löschen eines Systems mit allen Logs / Services etc
+   * Funktion zum vollständigen löschen eines 
+   * Systems mit allen Logs / Services etc
    * @param type $iId
    */
   public function deleteSystem($iId) {
@@ -297,6 +312,13 @@ class Server extends Service {
     }
   }
 
+  /**
+   * Methode CheckDNS
+   * Funktion zum prüfen des DNS im Unternehmen, trägt falsche Daten in die DB ein
+   * @param type $ip
+   * @param type $system
+   * @param type $cron
+   */
   public function checkDNS($ip, $system, $cron = False) {
     $db = new Database('SMT-ADMIN');
 
@@ -344,6 +366,9 @@ class Server extends Service {
     }
   }
 
+  /**
+   * Getter der DNS Fehler
+   */
   public function getCronIPs() {
     $db = new Database('SMT-ADMIN');
     $db->getQuery("SELECT * FROM wos_dns_cron ORDER BY INET_ATON(ipadresse)", array());
@@ -352,6 +377,11 @@ class Server extends Service {
     return $result;
   }
 
+  /**
+   * Methode zum setzen des Wartungsmodus
+   * @param type $id
+   * @param type $status
+   */
   public function updateWartung($id, $status) {
     $db = new Database('SMT-ADMIN');
 
@@ -366,7 +396,10 @@ class Server extends Service {
     $db->getQuery($query, array(':id' => $id, ':wartung' => $ns));
   }
   
-  
+  /**
+   * Getter der Ports zu einer IP Adresse
+   * @param type $ip
+   */
   public function getPorts($ip) {
     $db = new Database('SMT-ADMIN');
     $db->getQuery("SELECT * FROM wos_server_ports WHERE ipadresse=:ipadresse", array(':ipadresse' => $ip));

@@ -15,6 +15,11 @@ class Updater {
   protected $server_id;
   protected $server;
 
+  /**
+   * Check the current services
+   * @param int $server_id
+   * @param int $max_runs
+   */
   public function update($server_id, $max_runs = 3) {
 
     $wos = new Service;
@@ -38,7 +43,6 @@ class Updater {
         $this->status_new = $this->updateReminder($this->server['end_date'], $this->server['warn_date'], $this->server['isWarning']);
       }
 
-      // update server status
       $save = array(
         'last_check' => date('Y-m-d H:i:s'),
         'error' => $this->error,
@@ -81,6 +85,13 @@ class Updater {
     }
   }
 
+  /**
+   * Check the current server as a reminder
+   * @param int $end_date
+   * @param int $warn_date
+   * @param int $isWarning
+   * @return boolean
+   */
   protected function updateReminder($end_date, $warn_date, $isWarning) {
     $db = new Database('SMT-MONITOR');
     $notifier = new Notifier();
