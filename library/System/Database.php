@@ -19,7 +19,7 @@ class Database {
   protected $last;
 
   public function __construct($database) {   
-    $this->set('DB', parse_ini_file(str_replace('library'.DIRECTORY_SEPARATOR.'System', 'assets'.DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'mysql.ini', dirname(__FILE__)), TRUE));
+    $this->set('DB', parse_ini_file('assets/config/' . project_base . '.ini', TRUE));
     $this->set('DB', $this->DB[$database]);
   }
 

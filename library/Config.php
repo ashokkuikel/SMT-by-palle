@@ -41,7 +41,7 @@ class Config extends Language {
       $this->set('methode', 'index');
     }
     
-    $this->getConfig('assets/config/SMT.ini');
+    $this->getConfig('assets/config/' . project_base . '.ini');
 
     $project = array();
 
