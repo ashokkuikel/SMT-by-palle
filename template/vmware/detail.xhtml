@@ -9,18 +9,5 @@
   </span>
   
   <tal:block metal:use-macro="structure/service_liste.xhtml/standard" /> 
-	
-	<span tal:condition="php:_SESSION['admin'] == True' | NULL">
-		<a title="${text/vmware_detail_edit | NULL}" href="${getPath}/${controller}/edit/${server_detail/id}"><button type="submit" class="btn btn-success" style="float:left;">${text/vmware_detail_edit | NULL}</button></a>
-  </span>
-  
-  <span tal:condition="php:_SESSION['admin'] == True' | NULL" style="float:right;">
-		<a tal:condition="php:server_detail['wartung'] == 0 | NULL" title="${text/vmware_link_wartung_on | NULL}" href="${getPath}/${controller}/wartung/on/${server_detail/id}">
-      <button type="submit" class="btn btn-info" style="float:left;">${text/vmware_wartung_on | NULL}</button>
-    </a>
-    <a tal:condition="php:server_detail['wartung'] == 1 | NULL" title="${text/vmware_link_wartung_off}" href="${getPath}/${controller}/wartung/off/${server_detail/id}">
-      <button tal:condition="php:server_detail['wartung'] == 1 | NULL" type="submit" class="btn btn-warning" style="float:left;">${text/vmware_wartung_off | NULL}</button>
-    </a>
-  </span>
-    
+	    
 </tal:block>

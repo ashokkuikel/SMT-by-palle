@@ -18,12 +18,13 @@
       <td style="width:15%;">${liste/type}</td>
       <td style="width:15%;">${liste/port}</td>
       <td style="width:15%;">${liste/last_online}</td>
-      <td style="width:15%;">
+      <td style="width:12%;">
         <span aria-label="Left Align" class="glyphicon glyphicon-eye-open" aria-hidden="true" title="${text/structure_activ_monitoring | NULL}" tal:condition="php:liste['active'] == 'yes' | NULL" />
         <span aria-label="Left Align" class="glyphicon glyphicon-envelope" aria-hidden="true" title="${text/structure_email_message_on | NULL}" tal:condition="php:liste['email'] == 'yes' | NULL" />
         <span aria-label="Left Align" class="glyphicon glyphicon-phone" aria-hidden="true" title="${text/structure_push_message_on | NULL}" tal:condition="php:liste['pushover'] == 'yes' | NULL" />
       </td>
-      <td style="width:10%; text-align:right;">
+      <td style="width:13%; text-align:right;">
+        <a type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-signal" aria-hidden="true" href="${getPath}/monitor/detail/${liste/server_id}" />
         <span tal:condition="php:_SESSION['admin'] == True' | NULL">
           <a type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-edit" aria-hidden="true" title="${text/vmware_detail_edit | NULL}" href="${getPath}/monitor/service/edit/${liste/server_id}" />
           <a type="button" aria-label="Left Align" class="btn btn-default glyphicon glyphicon-remove" aria-hidden="true" title="${text/structure_del_service | NULL}" href="${getPath}/monitor/service/delete/${liste/server_id}" onclick="return confirm('${text/inventory_hardware_delete | NULL}');" />

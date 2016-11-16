@@ -1,4 +1,8 @@
 Changelog für die Version 1.3
 
-
-- 
+- textarea fix bei knowledgebase
+- config geändert, nur noch ein Config File
+- buttons entfernt, dafür fehlende knöpfe oberhalb eingefügt (serverliste & serviceliste)
+- javascript dateien aktualisiert (jquery)
+- fehlende kommentare in die klassen eingefügt und methode kommentiert
+- bootstrap komplett implementiert, grafiken durch Glyphicons ersetzt
