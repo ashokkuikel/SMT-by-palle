@@ -32,7 +32,6 @@ class App extends Config {
 
 $App = new App ();
 
-
 /**
  * 
  * @param type $class
